@@ -17,8 +17,11 @@ reauth() {
 method=$1; path=$2; body=$3
 [ "$method" = "REAUTH" ] && { reauth; echo reauthed; exit 0; }
 
-token=$(curl -s -k -b "$JAR" -c "$JAR" "https://$HOST/dataservice/client/token")
-if [[ "$token" == \<* ]]; then reauth; token=$(curl -s -k -b "$JAR" -c "$JAR" "https://$HOST/dataservice/client/token"); fi
+get_token() { curl -s -k -b "$JAR" -c "$JAR" "https://$HOST/dataservice/client/token"; }
+token=$(get_token)
+# token is a 64-256 char hex string; anything else (login HTML) means dead session
+if ! [[ "$token" =~ ^[0-9A-F]{64,256}$ ]]; then reauth; token=$(get_token); fi
+if ! [[ "$token" =~ ^[0-9A-F]{64,256}$ ]]; then echo "auth failed: token endpoint returned non-hex" >&2; exit 1; fi
 
 args=(-s -k -b "$JAR" -c "$JAR" -X "$method" -H "X-XSRF-TOKEN: $token")
 [ -n "$body" ] && args+=(-H 'Content-Type: application/json' -d "$body")
