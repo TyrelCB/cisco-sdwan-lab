@@ -1,0 +1,79 @@
+{
+ "vmanage/Manager01": {
+  "reachability": "reachable",
+  "state": "green",
+  "status": "normal",
+  "controlConnections": 6,
+  "ompPeers": null,
+  "bfdSessions": null,
+  "bfdSessionsUp": null,
+  "certificate-validity": "Valid",
+  "version": "20.18.2.1"
+ },
+ "vsmart/Controller01": {
+  "reachability": "reachable",
+  "state": "green",
+  "status": "normal",
+  "controlConnections": 11,
+  "ompPeers": 4,
+  "bfdSessions": null,
+  "bfdSessionsUp": null,
+  "certificate-validity": "Valid",
+  "version": "20.18.2.1"
+ },
+ "vbond/Validator01": {
+  "reachability": "reachable",
+  "state": "green",
+  "status": "normal",
+  "controlConnections": 18,
+  "ompPeers": null,
+  "bfdSessions": null,
+  "bfdSessionsUp": null,
+  "certificate-validity": "Valid",
+  "version": "20.18.2.1"
+ },
+ "vedge/Edge1": {
+  "reachability": "reachable",
+  "state": "green",
+  "status": "normal",
+  "controlConnections": 3,
+  "ompPeers": 1,
+  "bfdSessions": 6,
+  "bfdSessionsUp": 6,
+  "certificate-validity": "Valid",
+  "version": "17.18.01a.0.182"
+ },
+ "vedge/Edge2": {
+  "reachability": "reachable",
+  "state": "green",
+  "status": "normal",
+  "controlConnections": 3,
+  "ompPeers": 1,
+  "bfdSessions": 6,
+  "bfdSessionsUp": 6,
+  "certificate-validity": "Valid",
+  "version": "17.18.01a.0.182"
+ },
+ "vedge/Edge3": {
+  "reachability": "reachable",
+  "state": "green",
+  "status": "normal",
+  "controlConnections": 3,
+  "ompPeers": 1,
+  "bfdSessions": 6,
+  "bfdSessionsUp": 6,
+  "certificate-validity": "Valid",
+  "version": "17.18.01a.0.182"
+ },
+ "vedge/Edge4": {
+  "reachability": "reachable",
+  "state": "green",
+  "status": "normal",
+  "controlConnections": 3,
+  "ompPeers": 1,
+  "bfdSessions": 6,
+  "bfdSessionsUp": 6,
+  "certificate-validity": "Valid",
+  "version": "17.18.01a.0.182"
+ }
+}

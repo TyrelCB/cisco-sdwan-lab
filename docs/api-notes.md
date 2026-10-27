@@ -56,3 +56,8 @@ maintenance, monitor, commonComponents, common.
 
 ## Repro
 `scripts/sdv2.sh GET /dataservice/device` (auto-reauth on token expiry).
+
+## Fabric watcher (scheduled)
+`scripts/watch_fabric.py` — polls `/dataservice/device` once, diffs vs `out/watch_state.json`,
+prints `NO CHANGE` / `CHANGES:` / `ALERT:`. Counters are int-normalized (API mixes "6" and 6).
+Runs as LangBang scheduled task `a18be9674dca` every 15 min for the life of the lease.
