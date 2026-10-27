@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Authenticated call to the Catalyst SD-WAN sandbox vManage dataservice API.
+# Usage: sdv2.sh GET /dataservice/system/status
+#        sdv2.sh POST /dataservice/device/cli '{"deviceType":"c8000v","command":"show version","deviceId":["10.0.0.1"]}'
+#        sdv2.sh REAUTH     # force re-login
+HOST=sandbox-sdwan-2.cisco.com
+USER=devnetuser
+PASS="${SDWAN_PASS:-RG!_Yw919_83}"
+JAR="${SDWAN_JAR:-/tmp/sdv2_cookies.txt}"
+
+reauth() {
+  rm -f "$JAR"
+  curl -s -k -c "$JAR" -X POST "https://$HOST/j_security_check" \
+    --data-urlencode "j_username=$USER" --data-urlencode "j_password=$PASS" -o /dev/null
+}
+
+method=$1; path=$2; body=$3
+[ "$method" = "REAUTH" ] && { reauth; echo reauthed; exit 0; }
+
+token=$(curl -s -k -b "$JAR" -c "$JAR" "https://$HOST/dataservice/client/token")
+if [[ "$token" == \<* ]]; then reauth; token=$(curl -s -k -b "$JAR" -c "$JAR" "https://$HOST/dataservice/client/token"); fi
+
+args=(-s -k -b "$JAR" -c "$JAR" -X "$method" -H "X-XSRF-TOKEN: $token")
+[ -n "$body" ] && args+=(-H 'Content-Type: application/json' -d "$body")
+curl "${args[@]}" "https://$HOST$path"

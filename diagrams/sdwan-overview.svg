@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1040" viewBox="0 0 1600 1040" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <g id="rtr">
+      <circle cx="0" cy="0" r="34" fill="none" stroke="#31B5E8" stroke-width="5"/>
+      <path d="M -22 0 H 22 M -22 0 L -12 -8 M -22 0 L -12 8 M 22 0 L 12 -8 M 22 0 L 12 8" stroke="#31B5E8" stroke-width="5" fill="none" stroke-linecap="round"/>
+    </g>
+    <g id="rtr-sm">
+      <circle cx="0" cy="0" r="26" fill="none" stroke="#31B5E8" stroke-width="4"/>
+      <path d="M -16 0 H 16 M -16 0 L -8 -6 M -16 0 L -8 6 M 16 0 L 8 -6 M 16 0 L 8 6" stroke="#31B5E8" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </g>
+    <g id="cloud">
+      <path d="M -62 18 a 26 26 0 0 1 4 -50 a 34 34 0 0 1 64 -8 a 28 28 0 0 1 40 34 a 22 22 0 0 1 -16 24 z"
+            fill="#EAF8FE" stroke="#31B5E8" stroke-width="4"/>
+    </g>
+    <g id="lock">
+      <rect x="-12" y="-4" width="24" height="20" rx="3" fill="none" stroke="#F5A623" stroke-width="4"/>
+      <path d="M -7 -4 v -7 a 7 7 0 0 1 14 0 v 7" fill="none" stroke="#F5A623" stroke-width="4"/>
+      <circle cx="0" cy="6" r="3" fill="#F5A623"/>
+    </g>
+  </defs>
+
+  <rect width="1600" height="1040" fill="#FFFFFF"/>
+
+  <!-- plane labels -->
+  <rect x="40" y="70"  width="250" height="58" rx="8" fill="#1F3A5F"/>
+  <text x="165" y="106" fill="#FFFFFF" font-size="20" text-anchor="middle">Orchestration Plane</text>
+  <rect x="40" y="170" width="250" height="58" rx="8" fill="#1F3A5F"/>
+  <text x="165" y="196" fill="#FFFFFF" font-size="20" text-anchor="middle">Management Plane</text>
+  <text x="165" y="219" fill="#BFD3E6" font-size="13" text-anchor="middle">(Multi-tenant or Dedicated)</text>
+  <rect x="40" y="272" width="250" height="58" rx="8" fill="#1F3A5F"/>
+  <text x="165" y="308" fill="#FFFFFF" font-size="20" text-anchor="middle">Control Plane</text>
+  <rect x="40" y="860" width="250" height="58" rx="8" fill="#1F3A5F"/>
+  <text x="165" y="886" fill="#FFFFFF" font-size="20" text-anchor="middle">Data Plane</text>
+  <text x="165" y="908" fill="#BFD3E6" font-size="13" text-anchor="middle">(Physical or Virtual)</text>
+
+  <!-- big overlay box -->
+  <rect x="470" y="50" width="700" height="330" rx="14" fill="none" stroke="#7F8C99" stroke-width="4"/>
+
+  <!-- validators band -->
+  <rect x="500" y="70" width="640" height="84" rx="10" fill="none" stroke="#9AA7B2" stroke-width="3"/>
+  <use href="#rtr" x="760" y="112"/>
+  <use href="#rtr" x="880" y="112"/>
+  <text x="620" y="105" fill="#1F3A5F" font-size="19" text-anchor="end">SD-WAN Validators</text>
+  <text x="820" y="150" fill="#5B6B7A" font-size="13" text-anchor="middle">Validator01</text>
+
+  <!-- managers band -->
+  <rect x="500" y="168" width="640" height="84" rx="10" fill="none" stroke="#9AA7B2" stroke-width="3"/>
+  <use href="#rtr" x="760" y="210"/>
+  <use href="#rtr" x="880" y="210"/>
+  <text x="620" y="203" fill="#1F3A5F" font-size="19" text-anchor="end">SD-WAN Managers</text>
+  <text x="820" y="248" fill="#5B6B7A" font-size="13" text-anchor="middle">Manager01</text>
+
+  <!-- controllers band -->
+  <rect x="500" y="266" width="640" height="84" rx="10" fill="none" stroke="#9AA7B2" stroke-width="3"/>
+  <use href="#rtr" x="760" y="308"/>
+  <use href="#rtr" x="880" y="308"/>
+  <text x="620" y="301" fill="#1F3A5F" font-size="19" text-anchor="end">SD-WAN Controllers</text>
+  <text x="820" y="346" fill="#5B6B7A" font-size="13" text-anchor="middle">Controller01</text>
+
+  <!-- API gear -->
+  <line x1="1170" y1="210" x2="1330" y2="210" stroke="#5B6B7A" stroke-width="3"/>
+  <g transform="translate(1390,210)">
+    <path d="M 0 -46 L 10 -38 L 22 -42 L 28 -30 L 41 -28 L 39 -15 L 49 -6 L 42 5 L 47 17 L 35 22 L 34 35 L 21 33 L 13 44 L 2 37 L -9 44 L -16 33 L -29 35 L -30 22 L -42 17 L -37 5 L -46 -5 L -37 -15 L -40 -28 L -27 -30 L -22 -42 L -10 -38 Z"
+          fill="none" stroke="#5B6B7A" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="0" cy="0" r="16" fill="none" stroke="#5B6B7A" stroke-width="4"/>
+    <text x="0" y="7" fill="#1F3A5F" font-size="17" font-weight="bold" text-anchor="middle">API</text>
+  </g>
+
+  <!-- transport clouds -->
+  <use href="#cloud" x="640" y="560"/>
+  <text x="640" y="566" fill="#1F3A5F" font-size="19" text-anchor="middle">INET</text>
+  <use href="#cloud" x="920" y="560"/>
+  <text x="920" y="566" fill="#1F3A5F" font-size="19" text-anchor="middle">MPLS</text>
+
+  <!-- control plane dashed lines: overlay box to clouds -->
+  <g stroke="#5B6B7A" stroke-width="3" stroke-dasharray="9 7" fill="none">
+    <path d="M 640 380 L 640 505"/>
+    <path d="M 800 380 L 700 512"/>
+    <path d="M 800 380 L 880 512"/>
+    <path d="M 960 380 L 940 505"/>
+  </g>
+
+  <!-- underlay orange bus -->
+  <line x1="330" y1="760" x2="1390" y2="760" stroke="#F5A623" stroke-width="6"/>
+
+  <!-- edges -->
+  <use href="#lock" x="330" y="760"/>
+  <use href="#lock" x="1390" y="760"/>
+
+  <use href="#rtr-sm" x="470" y="760"/>
+  <use href="#rtr-sm" x="690" y="760"/>
+  <use href="#rtr-sm" x="910" y="760"/>
+  <use href="#rtr-sm" x="1130" y="760"/>
+
+  <text x="470"  y="830" fill="#1F3A5F" font-size="18" text-anchor="middle">Edge1 · SITE_1</text>
+  <text x="470"  y="854" fill="#5B6B7A" font-size="13" text-anchor="middle">10.0.0.1 · C8000V</text>
+  <text x="690"  y="830" fill="#1F3A5F" font-size="18" text-anchor="middle">Edge2 · SITE_2</text>
+  <text x="690"  y="854" fill="#5B6B7A" font-size="13" text-anchor="middle">10.0.0.2 · C8000V</text>
+  <text x="910"  y="830" fill="#1F3A5F" font-size="18" text-anchor="middle">Edge3 · SITE_3</text>
+  <text x="910"  y="854" fill="#5B6B7A" font-size="13" text-anchor="middle">10.0.0.3 · C8000V</text>
+  <text x="1130" y="830" fill="#1F3A5F" font-size="18" text-anchor="middle">Edge4 · SITE_4</text>
+  <text x="1130" y="854" fill="#5B6B7A" font-size="13" text-anchor="middle">10.0.0.4 · C8000V</text>
+
+  <!-- dashed underlay attach: edges to clouds -->
+  <g stroke="#5B6B7A" stroke-width="3" stroke-dasharray="9 7" fill="none">
+    <path d="M 470 734 L 600 592"/>
+    <path d="M 690 734 L 668 592"/>
+    <path d="M 910 734 L 900 592"/>
+    <path d="M 1130 734 L 965 592"/>
+  </g>
+
+  <!-- annotations -->
+  <g>
+    <line x1="368" y1="676" x2="446" y2="738" stroke="#1F3A5F" stroke-width="2"/>
+    <text x="300" y="648" fill="#1F3A5F" font-size="16">Secure IPSEC Data Channel</text>
+    <line x1="1240" y1="676" x2="1156" y2="738" stroke="#1F3A5F" stroke-width="2"/>
+    <text x="1290" y="648" fill="#1F3A5F" font-size="16" text-anchor="start">Secure DTLS</text>
+    <text x="1290" y="670" fill="#1F3A5F" font-size="16" text-anchor="start">Control Channel</text>
+  </g>
+
+  <text x="800" y="990" fill="#8A97A3" font-size="14" text-anchor="middle">Cisco Catalyst SD-WAN Always-On sandbox · sandbox-sdwan-2.cisco.com · vManage 20.18.2 · 2026-10-27</text>
+</svg>
