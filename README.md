@@ -17,6 +17,7 @@ All edges: BFD 6/6 up, 3 control connections, OMP up.
 
 ## Notes
 - docs/api-notes.md — auth flow + endpoint findings
+- docs/device-breakdown.md — per-device role/configuration breakdown
 - scripts/sdv2.sh — helper for authenticated API calls
 
 ## What the API session found (2026-10-27)
