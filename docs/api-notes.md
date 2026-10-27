@@ -21,6 +21,9 @@
 | `GET /dataservice/admin/user` | Users + groups (shows devnetuser=operator) |
 | `GET /dataservice/statistics/system/query/fields` | Stats field metadata |
 | `GET /dataservice/client/navigation` | SPA nav tree = capability map for this user |
+| `GET /dataservice/alarms` | Active alarms grid (0 active now). Param filtering (`fromTime=...`) rejected — `Invalid Query Param`; plain GET works, UI posts a grid request |
+| `GET /dataservice/device/bfd/sites/summary` | Site-health rollup: Full/Partial/No WAN connectivity counts (4 sites Full) |
+| `GET /dataservice/statistics/approute/query/fields` | App-route stats field catalog (the Monitor→App Reality path) |
 
 Response shape: grid views wrap rows in `data[]` with `header.columns[].property` naming the real fields.
 
@@ -28,6 +31,12 @@ Response shape: grid views wrap rows in `data[]` with `header.columns[].property
 - `POST /dataservice/template/device/feature/` (create feature template; path found by grepping the SPA bundle: `createDeviceFeatureTemplate → post(DEVICE_FEATURE_TEMPLATE)`) → **403 role not allowed**
 - CLI runner (`POST .../{uuid}/config` per bundle `getPrefixUrl("cli")+"/cli"`): reachable but **403** (same microservice permission).
 - Not present in this release's SPA at all: `/dataservice/realtime/operation/*`, `/dataservice/network/realtime-operation/request`, `/dataservice/v1/policy/*` (this build uses `/dataservice/template/policy/*` and `/dataservice/v1/feature-profile/*` for SDDP-era config).
+- **Realtime microservice 404s entirely** on this build: `POST /dataservice/realtime/system/device` and `POST /dataservice/realtime/{uuid}/system/device` both → 404 (0B), even with fresh token. The Monitor tables (OMP/BFD/control-links device views) are served another way here — use `/device` counters + `/device/control/synced/connections` instead.
+- Admin-only (403 for operator): `/v1/device/inventory`, `/v1/system/info/vedges`, `/device/runningconfig/*`, `/logs/device`, `/cluster-management/*`, `/device/summary`. `device/validity` and `device/reboothistory/synced` → 404/500.
+- `admin` user exists but its password is **not published** by the sandbox page (only `devnetuser` is issued); 9 common guesses all rejected → likely locked now, stop guessing.
+
+## Deep-read sweep script
+`scripts/deep_read.py` — one session, throttled, auto re-auth + per-call token refetch (the XSRF token **rotates**; a cached token 403s mid-run). Digs `/device` counters, per-edge ctrl conns, alarms, bfd site health, approute field catalog; payloads land in `out/`, digest printed.
 
 ## Finding hidden endpoints (method that worked)
 `GET /index.html` → `runtime.*.js` gives the lazy-chunk manifest `{id:"modules/name", hash}`; fetch the
@@ -39,7 +48,7 @@ maintenance, monitor, commonComponents, common.
 
 ## Fabric facts
 - 7 devices: Manager01 (vManage 100.0.0.1), Controller01 (vSmart .101), Validator01 (vBond .201), Edge1–4 (C8000V, sites 1–4, 10.0.0.1–4).
-- Every edge: 6/6 BFD up, OMP up, colors `mpls`/`biz-internet` (encap `dia`). Control connections per Edge1: 2× vSmart (one per tunnel color to 100.0.0.101) + 1× vManage = 3 DTLS sessions.
+- Every edge: 6/6 BFD up, OMP up, colors `mpls`/`biz-internet` (encap `dia`). - Control connections per Edge1: 2× vSmart (one per tunnel color to 100.0.0.101) + 1× vManage = 3 DTLS sessions. Controller-side counts from `/device`: vManage holds 6 ctrl conns, vSmart 11, vBond 18 (all edges + controllers register to vBond).
 - Control underlay 172.16.0.0/24; vManage DTLS port 12546, vSmart 12346.
 - Edges run 17.18.1a; controllers 20.18.2.1.
 - `GET /dataservice/template/config/running/{uuid}` → DEV0001 "Error publishing message" (sandbox doesn't back up running configs).
