@@ -1,0 +1,1550 @@
+annotations:
+- border_color: '#00000000'
+  border_style: ''
+  color: '#808080FF'
+  rotation: 0
+  text_bold: false
+  text_content: 'Gold sdwan 20.18.2.1 Lab
+
+    IP Addressing:
+
+    vmmmanage: 10.10.20.90 login: admin/C1sco12345
+
+    All device login: admin/admin
+
+    VPN0: 172.16.0.0/24
+
+    INET: 172.16.1.0/24
+
+    MPLS: 172.16.2.0/24'
+  text_font: monospace
+  text_italic: false
+  text_size: 12
+  text_unit: pt
+  thickness: 1
+  type: text
+  x1: -720.0
+  y1: -40.0
+  z_index: 0
+lab:
+  description: This lab was deployed using SD-WAN lab automation.
+  notes: '-- Do not delete this text --
+
+    manager_external_ip = 10.10.20.90:443
+
+    -- Do not delete this text --'
+  title: sdwan2018-healed
+  version: 0.3.0
+links:
+- conditioning: {}
+  i1: i1
+  i2: i0
+  id: l0
+  label: Manager01-eth1<->VPN0-port0
+  n1: n0
+  n2: n3
+- conditioning: {}
+  i1: i1
+  i2: i2
+  id: l1
+  label: Validator01-ge0/0<->VPN0-port2
+  n1: n2
+  n2: n3
+- conditioning: {}
+  i1: i0
+  i2: i0
+  id: l2
+  label: External-port<->Manager01-eth0
+  n1: n5
+  n2: n0
+- conditioning: {}
+  i1: i1
+  i2: i1
+  id: l3
+  label: Controller01-eth1<->VPN0-port1
+  n1: n1
+  n2: n3
+- conditioning: {}
+  i1: gw0
+  i2: i3
+  id: lGW1
+  label: Gateway-Gi00-VPN0
+  n1: nGW
+  n2: n3
+- conditioning: {}
+  i1: gw3
+  i2: i0
+  id: lGW2
+  label: Gateway-Gi03-Internet
+  n1: nGW
+  n2: n8
+- conditioning: {}
+  i1: inetp0
+  i2: i1
+  id: lI0
+  label: INET-Edge1
+  n1: nINET
+  n2: n9
+- conditioning: {}
+  i1: mplsp0
+  i2: i2
+  id: lM0
+  label: MPLS-Edge1
+  n1: nMPLS
+  n2: n9
+- conditioning: {}
+  i1: inetp1
+  i2: i1
+  id: lI1
+  label: INET-Edge2
+  n1: nINET
+  n2: n10
+- conditioning: {}
+  i1: mplsp1
+  i2: i2
+  id: lM1
+  label: MPLS-Edge2
+  n1: nMPLS
+  n2: n10
+- conditioning: {}
+  i1: inetp2
+  i2: i1
+  id: lI2
+  label: INET-Edge3
+  n1: nINET
+  n2: n11
+- conditioning: {}
+  i1: mplsp2
+  i2: i2
+  id: lM2
+  label: MPLS-Edge3
+  n1: nMPLS
+  n2: n11
+- conditioning: {}
+  i1: inetp3
+  i2: i1
+  id: lI3
+  label: INET-Edge4
+  n1: nINET
+  n2: n12
+- conditioning: {}
+  i1: mplsp3
+  i2: i2
+  id: lM3
+  label: MPLS-Edge4
+  n1: nMPLS
+  n2: n12
+nodes:
+- boot_disk_size: null
+  configuration:
+  - content: "#cloud-config\nfs_setup:\n- device: \"/dev/vdb\"\n  partition: \"none\"\
+      \n  filesystem: \"ext4\"\nmounts:\n- [ vdb, /opt/data ]\nwrite_files:\n- path:\
+      \ /etc/default/personality\n  content: \"vmanage\\n\"\n- path: /etc/default/inited\n\
+      \  content: \"1\\n\"\n- path: /usr/share/viptela/symantec-root-ca.crt\n- path:\
+      \ /usr/share/viptela/root-ca.crt\n  content: |\n    -----BEGIN CERTIFICATE-----\n\
+      \    MIIENDCCAxygAwIBAgIJAM1CyPPd8WmWMA0GCSqGSIb3DQEBBQUAMGgxCzAJBgNV\n    BAYTAlVTMRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3\n\
+      \    YW5fYXV0b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNv\n    bTAeFw0yMTEwMDkwODI5MzNaFw0zMTEwMDcwODI5MzNaMGgxCzAJBgNVBAYTAlVT\n\
+      \    MRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0\n    b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbTCCASIw\n\
+      \    DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALGDapA/Xvls8MTG5E5bo0RRfdYj\n    oXVmB6hSZfG1JYE6I7ynh4B7x2rYAt5m5xnINMnfkyTKq0lKaJTW5vpXcx+s7cL5\n\
+      \    i7vpiBGUAsWskCyPDw9oiroppvRkod1XRswtO4MeoVpFLiot3ZZ4m2UG744Zqn62\n    yjGaWAxXQ76Nv/IJmD0F+eLKqRqMZWRfh8IC1vg7TE96fwOWDWFFC17+H+1pdmlo\n\
+      \    9F23NUx8CGFyG3Ogid6yfJC/ZU/qRMzbbA9956IidoT5IKgSknd2D+CofloGdgF7\n    AUU/ThqzS8v43Xrl5DYnLbw6T90iGOaWosNF6syTwqmhzjFcMDJvQoov2PkCAwEA\n\
+      \    AaOB4DCB3TAPBgNVHRMBAf8EBTADAQH/MA4GA1UdDwEB/wQEAwIBBjAdBgNVHQ4E\n    FgQULBvXiVhzoYYk2HaiBireHejs5dUwgZoGA1UdIwSBkjCBj4AUjwz0pB+b2kwI\n\
+      \    nsqbUgDceAU0E6ihbKRqMGgxCzAJBgNVBAYTAlVTMRowGAYDVQQKDBFDaXNjbyBT\n    eXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0b3BvZDElMCMGA1UEAwwcc2ln\n\
+      \    bi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbYIJAL4ojZsLoCbyMA0GCSqGSIb3DQEB\n    BQUAA4IBAQDDYesnSuh+1AgruQvvAeQYOiC+cefc2Yy7u5xV1EVvD93hQBKvkajM\n\
+      \    x3Ovf44ISc2CDeD6NzQbl4pgrh2fZLb9sO2lV6XvG6G3G441vR4RNP2BU5Oc6AW0\n    HK2gKDrzanptMQwS5Rjxg0IbvL7FsbcvW2lNRucXKcb3jWivXcLGr+mkE+tvWZNk\n\
+      \    Z+gRQ27WJbrlqDFsqR6Xp0YyfGUCW4MxN9ThFVcN316lZ9HBoKP4UeRmGW+OOsLd\n    2uaLKkrIuTnA1q+qH0JqGz2/wLmR9cChwzTv8QH7aA0QEIi9Pc1M1PLc8BYNA0S+\n\
+      \    q+ZMrVqTNy2rwopE+4weCoXyC1W9fycA\n    -----END CERTIFICATE-----\n    -----BEGIN\
+      \ CERTIFICATE-----\n    MIIENDCCAxygAwIBAgIJAL4ojZsLoCbyMA0GCSqGSIb3DQEBCwUAMGgxCzAJBgNV\n\
+      \    BAYTAlVTMRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3\n    YW5fYXV0b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNv\n\
+      \    bTAeFw0yMTEwMDkwODI4NDdaFw0zMTEwMDcwODI4NDdaMGgxCzAJBgNVBAYTAlVT\n    MRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0\n\
+      \    b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbTCCASIw\n    DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANT90lMiYJqpCTvCj8yTBvBW8Gxk\n\
+      \    FSs4j4EE+5GG29/EdedU1z4LkwBM524/oaZWsWmbeOabqDSAV8679blkrarxqeup\n    DLpkChLDLq1w695+SDzBUByVlrI/5RCS68fTAkeXZ4AvlPt6WpS0xh21YNXHzeL2\n\
+      \    v5fCaYUDODlVWng/7Yk+8GJD4+jj9YWO/PNWtl7kVo3JqlIaGGPpm2Hrzu+QDoTe\n    j2OR8j77orHmBc1Z0XAIoyao7PM/bV/P+iuQna1RSFvxau1c+EE7UpUG3X+Fx0Ar\n\
+      \    mdVkQYAobfwZ82J8pnI87m52PmzFJi+mxEKEYyiu6P9mMsgvfZ/pyKXXyXkCAwEA\n    AaOB4DCB3TAdBgNVHQ4EFgQUjwz0pB+b2kwInsqbUgDceAU0E6gwgZoGA1UdIwSB\n\
+      \    kjCBj4AUjwz0pB+b2kwInsqbUgDceAU0E6ihbKRqMGgxCzAJBgNVBAYTAlVTMRow\n    GAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0b3Bv\n\
+      \    ZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbYIJAL4ojZsL\n    oCbyMA8GA1UdEwEB/wQFMAMBAf8wDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3DQEB\n\
+      \    CwUAA4IBAQB2frThMtZSiP2Lb/WjIG700cUjzPp7H6sIkJhEQEsQCDN4OGQa0Equ\n    tEMn16sjVhDZ5VXMYYB83u1jdAzhNJM2VvmYWvz2xcK6ZR5POwek5meTx71LMtDu\n\
+      \    pLYVBsmtVaWSUNpFpD8gRIV8DFHrsEqFRE9JKIPyRN+DiElmkOPnz0VQovApwhqt\n    48xyhsilGbJS22NsfSMnXw7JipZdaa8B7/q4BhVggPBOB+LTV+amb7kwsN8LRZDc\n\
+      \    Cai98VAOBOHrlPpymZ+hajj6aZ/oulU28i/qsGVZVyyawc7xMQjsdLvE0Iw21X56\n    ftwJNKPlej8RTVOK2Redbal5l/mgkCKX\n\
+      \    -----END CERTIFICATE-----\n\n- path: /etc/confd/init/zcloud.xml\n  content:\
+      \ |\n    <config xmlns=\"http://tail-f.com/ns/config/1.0\">\n      <system xmlns=\"\
+      http://viptela.com/system\">\n        <personality>vmanage</personality>\n \
+      \       <device-model>vmanage</device-model>\n        <organization-name>cml-sdwan-lab-tool</organization-name>\n\
+      \        <sp-organization-name>cml-sdwan-lab-tool</sp-organization-name>\n \
+      \       <vbond>\n          <remote>validator.sdwan.local</remote>\n        \
+      \  <port>12346</port>\n        </vbond>\n        <site-id>100</site-id>\n  \
+      \      <system-ip>100.0.0.1</system-ip>\n        <host-name>Manager01</host-name>\n\
+      \        <domain-id>1</domain-id>\n        <aaa>\n          <user>\n       \
+      \     <name>admin</name>\n            <password>$6$lTXLTiXZT6hx5kvl$96miZrYSJKXer1pigidvhxXmubDTBmjnrhRLDykvQsk9INmDEMb4q.42BDnUv3R0huHhYtDzeSum1/1p4y9BW1</password>\n\
+      \            <group>netadmin</group>\n          </user>\n          <user>\n\
+      \            <name>admin</name>\n            <password>$6$lTXLTiXZT6hx5kvl$96miZrYSJKXer1pigidvhxXmubDTBmjnrhRLDykvQsk9INmDEMb4q.42BDnUv3R0huHhYtDzeSum1/1p4y9BW1</password>\n\
+      \            <group>netadmin</group>\n          </user>\n        </aaa>\n  \
+      \    </system>\n      <vpn xmlns=\"http://viptela.com/vpn\">\n        <vpn-instance>\n\
+      \          <vpn-id>0</vpn-id>\n          <dns>\n            <dns-addr>172.16.0.254</dns-addr>\n\
+      \          </dns>\n          <ip>\n            <route>\n              <prefix>0.0.0.0/0</prefix>\n\
+      \              <next-hop>\n                <address>172.16.0.254</address>\n\
+      \              </next-hop>\n            </route>\n          </ip>\n        \
+      \  <interface>\n            <if-name>eth1</if-name>\n            <ip>\n    \
+      \          <address>172.16.0.1/24</address>\n            </ip>\n           \
+      \ <tunnel-interface>\n              <encapsulation>\n                <encap>ipsec</encap>\n\
+      \              </encapsulation>\n              <color>\n                <value>default</value>\n\
+      \              </color>\n              <allow-service>\n                <sshd>true</sshd>\n\
+      \                <netconf>true</netconf>\n              </allow-service>\n \
+      \           </tunnel-interface>\n            <shutdown>false</shutdown>\n  \
+      \        </interface>\n        </vpn-instance>\n        <vpn-instance>\n   \
+      \       <vpn-id>512</vpn-id>\n          <ip>\n            <route>\n        \
+      \      <prefix>0.0.0.0/0</prefix>\n              <next-hop>\n              \
+      \  <address>10.10.20.254</address>\n              </next-hop>\n            </route>\n\
+      \          </ip>\n          <interface>\n            <if-name>eth0</if-name>\n\
+      \            <ip>\n              <address>10.10.20.90/24</address>\n       \
+      \     </ip>\n            <shutdown>false</shutdown>\n          </interface>\n\
+      \        </vpn-instance>\n      </vpn>\n    </config>"
+    name: user-data
+  cpu_limit: null
+  cpus: null
+  data_volume: null
+  hide_links: false
+  id: n0
+  image_definition: cat-sdwan-manager-20.18.2.1
+  interfaces:
+  - id: i0
+    label: eth0
+    mac_address: null
+    slot: 0
+    type: physical
+  - id: i1
+    label: eth1
+    mac_address: null
+    slot: 1
+    type: physical
+  - id: i2
+    label: eth2
+    mac_address: null
+    slot: 2
+    type: physical
+  - id: i3
+    label: eth3
+    mac_address: null
+    slot: 3
+    type: physical
+  label: Manager01
+  node_definition: cat-sdwan-manager
+  parameters: {}
+  ram: null
+  tags: []
+  x: -280
+  y: -80
+- boot_disk_size: null
+  configuration:
+  - content: "#cloud-config\nwrite_files:\n- path: /etc/default/personality\n  content:\
+      \ \"vsmart\\n\"\n- path: /etc/default/inited\n  content: \"1\\n\"\n- path: /usr/share/viptela/symantec-root-ca.crt\n\
+      - path: /usr/share/viptela/root-ca.crt\n  content: |\n    -----BEGIN CERTIFICATE-----\n\
+      \    MIIENDCCAxygAwIBAgIJAM1CyPPd8WmWMA0GCSqGSIb3DQEBBQUAMGgxCzAJBgNV\n    BAYTAlVTMRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3\n\
+      \    YW5fYXV0b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNv\n    bTAeFw0yMTEwMDkwODI5MzNaFw0zMTEwMDcwODI5MzNaMGgxCzAJBgNVBAYTAlVT\n\
+      \    MRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0\n    b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbTCCASIw\n\
+      \    DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALGDapA/Xvls8MTG5E5bo0RRfdYj\n    oXVmB6hSZfG1JYE6I7ynh4B7x2rYAt5m5xnINMnfkyTKq0lKaJTW5vpXcx+s7cL5\n\
+      \    i7vpiBGUAsWskCyPDw9oiroppvRkod1XRswtO4MeoVpFLiot3ZZ4m2UG744Zqn62\n    yjGaWAxXQ76Nv/IJmD0F+eLKqRqMZWRfh8IC1vg7TE96fwOWDWFFC17+H+1pdmlo\n\
+      \    9F23NUx8CGFyG3Ogid6yfJC/ZU/qRMzbbA9956IidoT5IKgSknd2D+CofloGdgF7\n    AUU/ThqzS8v43Xrl5DYnLbw6T90iGOaWosNF6syTwqmhzjFcMDJvQoov2PkCAwEA\n\
+      \    AaOB4DCB3TAPBgNVHRMBAf8EBTADAQH/MA4GA1UdDwEB/wQEAwIBBjAdBgNVHQ4E\n    FgQULBvXiVhzoYYk2HaiBireHejs5dUwgZoGA1UdIwSBkjCBj4AUjwz0pB+b2kwI\n\
+      \    nsqbUgDceAU0E6ihbKRqMGgxCzAJBgNVBAYTAlVTMRowGAYDVQQKDBFDaXNjbyBT\n    eXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0b3BvZDElMCMGA1UEAwwcc2ln\n\
+      \    bi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbYIJAL4ojZsLoCbyMA0GCSqGSIb3DQEB\n    BQUAA4IBAQDDYesnSuh+1AgruQvvAeQYOiC+cefc2Yy7u5xV1EVvD93hQBKvkajM\n\
+      \    x3Ovf44ISc2CDeD6NzQbl4pgrh2fZLb9sO2lV6XvG6G3G441vR4RNP2BU5Oc6AW0\n    HK2gKDrzanptMQwS5Rjxg0IbvL7FsbcvW2lNRucXKcb3jWivXcLGr+mkE+tvWZNk\n\
+      \    Z+gRQ27WJbrlqDFsqR6Xp0YyfGUCW4MxN9ThFVcN316lZ9HBoKP4UeRmGW+OOsLd\n    2uaLKkrIuTnA1q+qH0JqGz2/wLmR9cChwzTv8QH7aA0QEIi9Pc1M1PLc8BYNA0S+\n\
+      \    q+ZMrVqTNy2rwopE+4weCoXyC1W9fycA\n    -----END CERTIFICATE-----\n    -----BEGIN\
+      \ CERTIFICATE-----\n    MIIENDCCAxygAwIBAgIJAL4ojZsLoCbyMA0GCSqGSIb3DQEBCwUAMGgxCzAJBgNV\n\
+      \    BAYTAlVTMRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3\n    YW5fYXV0b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNv\n\
+      \    bTAeFw0yMTEwMDkwODI4NDdaFw0zMTEwMDcwODI4NDdaMGgxCzAJBgNVBAYTAlVT\n    MRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0\n\
+      \    b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbTCCASIw\n    DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANT90lMiYJqpCTvCj8yTBvBW8Gxk\n\
+      \    FSs4j4EE+5GG29/EdedU1z4LkwBM524/oaZWsWmbeOabqDSAV8679blkrarxqeup\n    DLpkChLDLq1w695+SDzBUByVlrI/5RCS68fTAkeXZ4AvlPt6WpS0xh21YNXHzeL2\n\
+      \    v5fCaYUDODlVWng/7Yk+8GJD4+jj9YWO/PNWtl7kVo3JqlIaGGPpm2Hrzu+QDoTe\n    j2OR8j77orHmBc1Z0XAIoyao7PM/bV/P+iuQna1RSFvxau1c+EE7UpUG3X+Fx0Ar\n\
+      \    mdVkQYAobfwZ82J8pnI87m52PmzFJi+mxEKEYyiu6P9mMsgvfZ/pyKXXyXkCAwEA\n    AaOB4DCB3TAdBgNVHQ4EFgQUjwz0pB+b2kwInsqbUgDceAU0E6gwgZoGA1UdIwSB\n\
+      \    kjCBj4AUjwz0pB+b2kwInsqbUgDceAU0E6ihbKRqMGgxCzAJBgNVBAYTAlVTMRow\n    GAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0b3Bv\n\
+      \    ZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbYIJAL4ojZsL\n    oCbyMA8GA1UdEwEB/wQFMAMBAf8wDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3DQEB\n\
+      \    CwUAA4IBAQB2frThMtZSiP2Lb/WjIG700cUjzPp7H6sIkJhEQEsQCDN4OGQa0Equ\n    tEMn16sjVhDZ5VXMYYB83u1jdAzhNJM2VvmYWvz2xcK6ZR5POwek5meTx71LMtDu\n\
+      \    pLYVBsmtVaWSUNpFpD8gRIV8DFHrsEqFRE9JKIPyRN+DiElmkOPnz0VQovApwhqt\n    48xyhsilGbJS22NsfSMnXw7JipZdaa8B7/q4BhVggPBOB+LTV+amb7kwsN8LRZDc\n\
+      \    Cai98VAOBOHrlPpymZ+hajj6aZ/oulU28i/qsGVZVyyawc7xMQjsdLvE0Iw21X56\n    ftwJNKPlej8RTVOK2Redbal5l/mgkCKX\n\
+      \    -----END CERTIFICATE-----\n\n- path: /etc/confd/init/zcloud.xml\n  content:\
+      \ |\n    <config xmlns=\"http://tail-f.com/ns/config/1.0\">\n      <system xmlns=\"\
+      http://viptela.com/system\">\n        <personality>vsmart</personality>\n  \
+      \      <device-model>vsmart</device-model>\n        <organization-name>cml-sdwan-lab-tool</organization-name>\n\
+      \        <sp-organization-name>cml-sdwan-lab-tool</sp-organization-name>\n \
+      \       <vbond>\n          <remote>validator.sdwan.local</remote>\n        \
+      \  <port>12346</port>\n        </vbond>\n        <site-id>100</site-id>\n  \
+      \      <system-ip>100.0.0.101</system-ip>\n        <host-name>Controller01</host-name>\n\
+      \        <domain-id>1</domain-id>\n        <aaa>\n          <user>\n       \
+      \     <name>admin</name>\n            <password>$6$9ac6af765f1cd0c0$jRM/rCPsQ56JlDU/1s9H7zhhksy/FZHv37zDJkzM6h/IU/FsnTcBuLwV3AVI5kCnfX9wYmqP8CsGk.4PrjC22/</password>\n\
+      \            <group>netadmin</group>\n          </user>\n        </aaa>\n  \
+      \    </system>\n      <vpn xmlns=\"http://viptela.com/vpn\">\n        <vpn-instance>\n\
+      \          <vpn-id>0</vpn-id>\n          <dns>\n            <dns-addr>172.16.0.254</dns-addr>\n\
+      \          </dns>\n          <ip>\n            <route>\n              <prefix>172.16.0.0/16</prefix>\n\
+      \              <next-hop>\n                <address>172.16.0.254</address>\n\
+      \              </next-hop>\n            </route>\n          </ip>\n        \
+      \  <interface>\n            <if-name>eth1</if-name>\n            <ip>\n    \
+      \          <address>172.16.0.101/24</address>\n            </ip>\n         \
+      \   <tunnel-interface>\n              <encapsulation>\n                <encap>ipsec</encap>\n\
+      \              </encapsulation>\n              <color>\n                <value>default</value>\n\
+      \              </color>\n              <allow-service>\n                <sshd>true</sshd>\n\
+      \                <netconf>true</netconf>\n              </allow-service>\n \
+      \           </tunnel-interface>\n            <shutdown>false</shutdown>\n  \
+      \        </interface>\n        </vpn-instance>\n      </vpn>\n    </config>"
+    name: user-data
+  cpu_limit: null
+  cpus: null
+  data_volume: null
+  hide_links: false
+  id: n1
+  image_definition: cat-sdwan-controller-20.18.2.1
+  interfaces:
+  - id: i0
+    label: eth0
+    mac_address: null
+    slot: 0
+    type: physical
+  - id: i1
+    label: eth1
+    mac_address: null
+    slot: 1
+    type: physical
+  - id: i2
+    label: eth2
+    mac_address: null
+    slot: 2
+    type: physical
+  - id: i3
+    label: eth3
+    mac_address: null
+    slot: 3
+    type: physical
+  label: Controller01
+  node_definition: cat-sdwan-controller
+  parameters: {}
+  ram: null
+  tags: []
+  x: -40
+  y: -80
+- boot_disk_size: null
+  configuration:
+  - content: "#cloud-config\nwrite_files:\n- path: /etc/default/inited\n  content:\
+      \ \"1\\n\"\n- path: /usr/share/viptela/symantec-root-ca.crt\n- path: /usr/share/viptela/root-ca.crt\n\
+      \  content: |\n    -----BEGIN CERTIFICATE-----\n    MIIENDCCAxygAwIBAgIJAM1CyPPd8WmWMA0GCSqGSIb3DQEBBQUAMGgxCzAJBgNV\n\
+      \    BAYTAlVTMRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3\n    YW5fYXV0b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNv\n\
+      \    bTAeFw0yMTEwMDkwODI5MzNaFw0zMTEwMDcwODI5MzNaMGgxCzAJBgNVBAYTAlVT\n    MRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0\n\
+      \    b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbTCCASIw\n    DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALGDapA/Xvls8MTG5E5bo0RRfdYj\n\
+      \    oXVmB6hSZfG1JYE6I7ynh4B7x2rYAt5m5xnINMnfkyTKq0lKaJTW5vpXcx+s7cL5\n    i7vpiBGUAsWskCyPDw9oiroppvRkod1XRswtO4MeoVpFLiot3ZZ4m2UG744Zqn62\n\
+      \    yjGaWAxXQ76Nv/IJmD0F+eLKqRqMZWRfh8IC1vg7TE96fwOWDWFFC17+H+1pdmlo\n    9F23NUx8CGFyG3Ogid6yfJC/ZU/qRMzbbA9956IidoT5IKgSknd2D+CofloGdgF7\n\
+      \    AUU/ThqzS8v43Xrl5DYnLbw6T90iGOaWosNF6syTwqmhzjFcMDJvQoov2PkCAwEA\n    AaOB4DCB3TAPBgNVHRMBAf8EBTADAQH/MA4GA1UdDwEB/wQEAwIBBjAdBgNVHQ4E\n\
+      \    FgQULBvXiVhzoYYk2HaiBireHejs5dUwgZoGA1UdIwSBkjCBj4AUjwz0pB+b2kwI\n    nsqbUgDceAU0E6ihbKRqMGgxCzAJBgNVBAYTAlVTMRowGAYDVQQKDBFDaXNjbyBT\n\
+      \    eXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0b3BvZDElMCMGA1UEAwwcc2ln\n    bi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbYIJAL4ojZsLoCbyMA0GCSqGSIb3DQEB\n\
+      \    BQUAA4IBAQDDYesnSuh+1AgruQvvAeQYOiC+cefc2Yy7u5xV1EVvD93hQBKvkajM\n    x3Ovf44ISc2CDeD6NzQbl4pgrh2fZLb9sO2lV6XvG6G3G441vR4RNP2BU5Oc6AW0\n\
+      \    HK2gKDrzanptMQwS5Rjxg0IbvL7FsbcvW2lNRucXKcb3jWivXcLGr+mkE+tvWZNk\n    Z+gRQ27WJbrlqDFsqR6Xp0YyfGUCW4MxN9ThFVcN316lZ9HBoKP4UeRmGW+OOsLd\n\
+      \    2uaLKkrIuTnA1q+qH0JqGz2/wLmR9cChwzTv8QH7aA0QEIi9Pc1M1PLc8BYNA0S+\n    q+ZMrVqTNy2rwopE+4weCoXyC1W9fycA\n\
+      \    -----END CERTIFICATE-----\n    -----BEGIN CERTIFICATE-----\n    MIIENDCCAxygAwIBAgIJAL4ojZsLoCbyMA0GCSqGSIb3DQEBCwUAMGgxCzAJBgNV\n\
+      \    BAYTAlVTMRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3\n    YW5fYXV0b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNv\n\
+      \    bTAeFw0yMTEwMDkwODI4NDdaFw0zMTEwMDcwODI4NDdaMGgxCzAJBgNVBAYTAlVT\n    MRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0\n\
+      \    b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbTCCASIw\n    DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANT90lMiYJqpCTvCj8yTBvBW8Gxk\n\
+      \    FSs4j4EE+5GG29/EdedU1z4LkwBM524/oaZWsWmbeOabqDSAV8679blkrarxqeup\n    DLpkChLDLq1w695+SDzBUByVlrI/5RCS68fTAkeXZ4AvlPt6WpS0xh21YNXHzeL2\n\
+      \    v5fCaYUDODlVWng/7Yk+8GJD4+jj9YWO/PNWtl7kVo3JqlIaGGPpm2Hrzu+QDoTe\n    j2OR8j77orHmBc1Z0XAIoyao7PM/bV/P+iuQna1RSFvxau1c+EE7UpUG3X+Fx0Ar\n\
+      \    mdVkQYAobfwZ82J8pnI87m52PmzFJi+mxEKEYyiu6P9mMsgvfZ/pyKXXyXkCAwEA\n    AaOB4DCB3TAdBgNVHQ4EFgQUjwz0pB+b2kwInsqbUgDceAU0E6gwgZoGA1UdIwSB\n\
+      \    kjCBj4AUjwz0pB+b2kwInsqbUgDceAU0E6ihbKRqMGgxCzAJBgNVBAYTAlVTMRow\n    GAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0b3Bv\n\
+      \    ZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbYIJAL4ojZsL\n    oCbyMA8GA1UdEwEB/wQFMAMBAf8wDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3DQEB\n\
+      \    CwUAA4IBAQB2frThMtZSiP2Lb/WjIG700cUjzPp7H6sIkJhEQEsQCDN4OGQa0Equ\n    tEMn16sjVhDZ5VXMYYB83u1jdAzhNJM2VvmYWvz2xcK6ZR5POwek5meTx71LMtDu\n\
+      \    pLYVBsmtVaWSUNpFpD8gRIV8DFHrsEqFRE9JKIPyRN+DiElmkOPnz0VQovApwhqt\n    48xyhsilGbJS22NsfSMnXw7JipZdaa8B7/q4BhVggPBOB+LTV+amb7kwsN8LRZDc\n\
+      \    Cai98VAOBOHrlPpymZ+hajj6aZ/oulU28i/qsGVZVyyawc7xMQjsdLvE0Iw21X56\n    ftwJNKPlej8RTVOK2Redbal5l/mgkCKX\n\
+      \    -----END CERTIFICATE-----\n\n- path: /etc/confd/init/zcloud.xml\n  content:\
+      \ |\n    <config xmlns=\"http://tail-f.com/ns/config/1.0\">\n      <system xmlns=\"\
+      http://viptela.com/system\">\n        <personality>vedge</personality>\n   \
+      \     <device-model>vedge-cloud</device-model>\n        <organization-name>cml-sdwan-lab-tool</organization-name>\n\
+      \        <sp-organization-name>cml-sdwan-lab-tool</sp-organization-name>\n \
+      \       <vbond>\n          <local></local>\n          <remote>172.16.0.201</remote>\n\
+      \          <port>12346</port>\n        </vbond>\n        <site-id>100</site-id>\n\
+      \        <system-ip>100.0.0.201</system-ip>\n        <host-name>Validator01</host-name>\n\
+      \        <domain-id>1</domain-id>\n        <aaa>\n          <user>\n       \
+      \     <name>admin</name>\n            <password>$6$9ac6af765f1cd0c0$jRM/rCPsQ56JlDU/1s9H7zhhksy/FZHv37zDJkzM6h/IU/FsnTcBuLwV3AVI5kCnfX9wYmqP8CsGk.4PrjC22/</password>\n\
+      \            <group>netadmin</group>\n          </user>\n        </aaa>\n  \
+      \    </system>\n      <vpn xmlns=\"http://viptela.com/vpn\">\n        <vpn-instance>\n\
+      \          <vpn-id>0</vpn-id>\n          <dns>\n            <dns-addr>172.16.0.254</dns-addr>\n\
+      \          </dns>\n          <ip>\n            <route>\n              <prefix>172.16.0.0/16</prefix>\n\
+      \              <next-hop>\n                <address>172.16.0.254</address>\n\
+      \              </next-hop>\n            </route>\n          </ip>\n        \
+      \  <interface>\n            <if-name>ge0/0</if-name>\n            <ip>\n   \
+      \           <address>172.16.0.201/24</address>\n            </ip>\n        \
+      \    <tunnel-interface>\n              <encapsulation>\n                <encap>ipsec</encap>\n\
+      \              </encapsulation>\n              <color>\n                <value>default</value>\n\
+      \              </color>\n              <allow-service>\n                <sshd>true</sshd>\n\
+      \                <netconf>true</netconf>\n              </allow-service>\n \
+      \           </tunnel-interface>\n            <shutdown>false</shutdown>\n  \
+      \        </interface>\n        </vpn-instance>\n      </vpn>\n    </config>"
+    name: user-data
+  cpu_limit: null
+  cpus: null
+  data_volume: null
+  hide_links: false
+  id: n2
+  image_definition: cat-sdwan-validator-20.18.2.1
+  interfaces:
+  - id: i0
+    label: eth0
+    mac_address: null
+    slot: 0
+    type: physical
+  - id: i1
+    label: ge0/0
+    mac_address: null
+    slot: 1
+    type: physical
+  label: Validator01
+  node_definition: cat-sdwan-validator
+  parameters: {}
+  ram: null
+  tags: []
+  x: -160
+  y: -80
+- boot_disk_size: null
+  configuration: null
+  cpu_limit: null
+  cpus: null
+  data_volume: null
+  hide_links: false
+  id: n3
+  image_definition: null
+  interfaces:
+  - id: i0
+    label: port0
+    mac_address: null
+    slot: 0
+    type: physical
+  - id: i1
+    label: port1
+    mac_address: null
+    slot: 1
+    type: physical
+  - id: i2
+    label: port2
+    mac_address: null
+    slot: 2
+    type: physical
+  - id: i3
+    label: port3
+    mac_address: null
+    slot: 3
+    type: physical
+  - id: i4
+    label: port4
+    mac_address: null
+    slot: 4
+    type: physical
+  - id: i5
+    label: port5
+    mac_address: null
+    slot: 5
+    type: physical
+  - id: i6
+    label: port6
+    mac_address: null
+    slot: 6
+    type: physical
+  - id: i7
+    label: port7
+    mac_address: null
+    slot: 7
+    type: physical
+  - id: i8
+    label: port8
+    mac_address: null
+    slot: 8
+    type: physical
+  - id: i9
+    label: port9
+    mac_address: null
+    slot: 9
+    type: physical
+  - id: i10
+    label: port10
+    mac_address: null
+    slot: 10
+    type: physical
+  - id: i11
+    label: port11
+    mac_address: null
+    slot: 11
+    type: physical
+  - id: i12
+    label: port12
+    mac_address: null
+    slot: 12
+    type: physical
+  - id: i13
+    label: port13
+    mac_address: null
+    slot: 13
+    type: physical
+  - id: i14
+    label: port14
+    mac_address: null
+    slot: 14
+    type: physical
+  - id: i15
+    label: port15
+    mac_address: null
+    slot: 15
+    type: physical
+  - id: i16
+    label: port16
+    mac_address: null
+    slot: 16
+    type: physical
+  - id: i17
+    label: port17
+    mac_address: null
+    slot: 17
+    type: physical
+  - id: i18
+    label: port18
+    mac_address: null
+    slot: 18
+    type: physical
+  - id: i19
+    label: port19
+    mac_address: null
+    slot: 19
+    type: physical
+  - id: i20
+    label: port20
+    mac_address: null
+    slot: 20
+    type: physical
+  - id: i21
+    label: port21
+    mac_address: null
+    slot: 21
+    type: physical
+  - id: i22
+    label: port22
+    mac_address: null
+    slot: 22
+    type: physical
+  - id: i23
+    label: port23
+    mac_address: null
+    slot: 23
+    type: physical
+  - id: i24
+    label: port24
+    mac_address: null
+    slot: 24
+    type: physical
+  - id: i25
+    label: port25
+    mac_address: null
+    slot: 25
+    type: physical
+  - id: i26
+    label: port26
+    mac_address: null
+    slot: 26
+    type: physical
+  - id: i27
+    label: port27
+    mac_address: null
+    slot: 27
+    type: physical
+  - id: i28
+    label: port28
+    mac_address: null
+    slot: 28
+    type: physical
+  - id: i29
+    label: port29
+    mac_address: null
+    slot: 29
+    type: physical
+  - id: i30
+    label: port30
+    mac_address: null
+    slot: 30
+    type: physical
+  - id: i31
+    label: port31
+    mac_address: null
+    slot: 31
+    type: physical
+  label: VPN0
+  node_definition: unmanaged_switch
+  parameters: {}
+  ram: null
+  tags: []
+  x: -160
+  y: 0
+- boot_disk_size: null
+  configuration:
+  - content: System Bridge
+    name: default
+  cpu_limit: null
+  cpus: null
+  data_volume: null
+  hide_links: false
+  id: n5
+  image_definition: null
+  interfaces:
+  - id: i0
+    label: port
+    mac_address: null
+    slot: 0
+    type: physical
+  label: External
+  node_definition: external_connector
+  parameters: {}
+  ram: null
+  tags: []
+  x: -400
+  y: -80
+- boot_disk_size: null
+  configuration:
+  - content: NAT
+    name: default
+  cpu_limit: null
+  cpus: null
+  data_volume: null
+  hide_links: false
+  id: n8
+  image_definition: null
+  interfaces:
+  - id: i0
+    label: port
+    mac_address: null
+    slot: 0
+    type: physical
+  label: Internet
+  node_definition: external_connector
+  parameters: {}
+  ram: null
+  tags: []
+  x: -280
+  y: 120
+- boot_disk_size: null
+  configuration:
+  - content: "Content-Type: multipart/mixed; boundary=\"===============1003419234728088307==\"\
+      \nMIME-Version: 1.0\n\n--===============1003419234728088307==\nContent-Type:\
+      \ text/cloud-config; charset=\"us-ascii\"\nMIME-Version: 1.0\nContent-Transfer-Encoding:\
+      \ 7bit\nContent-Disposition: attachment; filename=\"tmpx7kdk7he\"\n\n#cloud-config\n\
+      vinitparam:\n - uuid : C8K-3D1A8960-6E76-532C-DA93-50626FC5797E\n - otp : e3c8c96eaa0f45dfb2d7f6a868a4273a\n\
+      \ - vbond : validator.sdwan.local\n - org : cml-sdwan-lab-tool\n - rcc : true\n\
+      ca-certs:\n  remove-defaults: false\n  trusted:\n  - |\n   -----BEGIN CERTIFICATE-----\n\
+      \   MIIENDCCAxygAwIBAgIJAM1CyPPd8WmWMA0GCSqGSIb3DQEBBQUAMGgxCzAJBgNV\n   BAYTAlVTMRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3\n\
+      \   YW5fYXV0b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNv\n   bTAeFw0yMTEwMDkwODI5MzNaFw0zMTEwMDcwODI5MzNaMGgxCzAJBgNVBAYTAlVT\n\
+      \   MRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0\n   b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbTCCASIw\n\
+      \   DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALGDapA/Xvls8MTG5E5bo0RRfdYj\n   oXVmB6hSZfG1JYE6I7ynh4B7x2rYAt5m5xnINMnfkyTKq0lKaJTW5vpXcx+s7cL5\n\
+      \   i7vpiBGUAsWskCyPDw9oiroppvRkod1XRswtO4MeoVpFLiot3ZZ4m2UG744Zqn62\n   yjGaWAxXQ76Nv/IJmD0F+eLKqRqMZWRfh8IC1vg7TE96fwOWDWFFC17+H+1pdmlo\n\
+      \   9F23NUx8CGFyG3Ogid6yfJC/ZU/qRMzbbA9956IidoT5IKgSknd2D+CofloGdgF7\n   AUU/ThqzS8v43Xrl5DYnLbw6T90iGOaWosNF6syTwqmhzjFcMDJvQoov2PkCAwEA\n\
+      \   AaOB4DCB3TAPBgNVHRMBAf8EBTADAQH/MA4GA1UdDwEB/wQEAwIBBjAdBgNVHQ4E\n   FgQULBvXiVhzoYYk2HaiBireHejs5dUwgZoGA1UdIwSBkjCBj4AUjwz0pB+b2kwI\n\
+      \   nsqbUgDceAU0E6ihbKRqMGgxCzAJBgNVBAYTAlVTMRowGAYDVQQKDBFDaXNjbyBT\n   eXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0b3BvZDElMCMGA1UEAwwcc2ln\n\
+      \   bi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbYIJAL4ojZsLoCbyMA0GCSqGSIb3DQEB\n   BQUAA4IBAQDDYesnSuh+1AgruQvvAeQYOiC+cefc2Yy7u5xV1EVvD93hQBKvkajM\n\
+      \   x3Ovf44ISc2CDeD6NzQbl4pgrh2fZLb9sO2lV6XvG6G3G441vR4RNP2BU5Oc6AW0\n   HK2gKDrzanptMQwS5Rjxg0IbvL7FsbcvW2lNRucXKcb3jWivXcLGr+mkE+tvWZNk\n\
+      \   Z+gRQ27WJbrlqDFsqR6Xp0YyfGUCW4MxN9ThFVcN316lZ9HBoKP4UeRmGW+OOsLd\n   2uaLKkrIuTnA1q+qH0JqGz2/wLmR9cChwzTv8QH7aA0QEIi9Pc1M1PLc8BYNA0S+\n\
+      \   q+ZMrVqTNy2rwopE+4weCoXyC1W9fycA\n   -----END CERTIFICATE-----\n   -----BEGIN\
+      \ CERTIFICATE-----\n   MIIENDCCAxygAwIBAgIJAL4ojZsLoCbyMA0GCSqGSIb3DQEBCwUAMGgxCzAJBgNV\n\
+      \   BAYTAlVTMRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3\n   YW5fYXV0b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNv\n\
+      \   bTAeFw0yMTEwMDkwODI4NDdaFw0zMTEwMDcwODI4NDdaMGgxCzAJBgNVBAYTAlVT\n   MRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0\n\
+      \   b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbTCCASIw\n   DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANT90lMiYJqpCTvCj8yTBvBW8Gxk\n\
+      \   FSs4j4EE+5GG29/EdedU1z4LkwBM524/oaZWsWmbeOabqDSAV8679blkrarxqeup\n   DLpkChLDLq1w695+SDzBUByVlrI/5RCS68fTAkeXZ4AvlPt6WpS0xh21YNXHzeL2\n\
+      \   v5fCaYUDODlVWng/7Yk+8GJD4+jj9YWO/PNWtl7kVo3JqlIaGGPpm2Hrzu+QDoTe\n   j2OR8j77orHmBc1Z0XAIoyao7PM/bV/P+iuQna1RSFvxau1c+EE7UpUG3X+Fx0Ar\n\
+      \   mdVkQYAobfwZ82J8pnI87m52PmzFJi+mxEKEYyiu6P9mMsgvfZ/pyKXXyXkCAwEA\n   AaOB4DCB3TAdBgNVHQ4EFgQUjwz0pB+b2kwInsqbUgDceAU0E6gwgZoGA1UdIwSB\n\
+      \   kjCBj4AUjwz0pB+b2kwInsqbUgDceAU0E6ihbKRqMGgxCzAJBgNVBAYTAlVTMRow\n   GAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0b3Bv\n\
+      \   ZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbYIJAL4ojZsL\n   oCbyMA8GA1UdEwEB/wQFMAMBAf8wDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3DQEB\n\
+      \   CwUAA4IBAQB2frThMtZSiP2Lb/WjIG700cUjzPp7H6sIkJhEQEsQCDN4OGQa0Equ\n   tEMn16sjVhDZ5VXMYYB83u1jdAzhNJM2VvmYWvz2xcK6ZR5POwek5meTx71LMtDu\n\
+      \   pLYVBsmtVaWSUNpFpD8gRIV8DFHrsEqFRE9JKIPyRN+DiElmkOPnz0VQovApwhqt\n   48xyhsilGbJS22NsfSMnXw7JipZdaa8B7/q4BhVggPBOB+LTV+amb7kwsN8LRZDc\n\
+      \   Cai98VAOBOHrlPpymZ+hajj6aZ/oulU28i/qsGVZVyyawc7xMQjsdLvE0Iw21X56\n   ftwJNKPlej8RTVOK2Redbal5l/mgkCKX\n\
+      \   -----END CERTIFICATE-----\n\n--===============1003419234728088307==\nContent-Type:\
+      \ text/cloud-boothook; charset=\"us-ascii\"\nMIME-Version: 1.0\nContent-Transfer-Encoding:\
+      \ 7bit\nContent-Disposition: attachment; filename=\"config-C8K-3D1A8960-6E76-532C-DA93-50626FC5797E.txt\"\
+      \n\n#cloud-boothook\nconfig\n  system\n   ztp-status            success\n  \
+      \ pseudo-confirm-commit 300\n   personality           vedge\n   device-model\
+      \          vedge-C8000V\n   chassis-number        C8K-3D1A8960-6E76-532C-DA93-50626FC5797E\n\
+      \   system-ip             10.0.0.1\n   overlay-id            1\n   site-id \
+      \              1\n   ipv6-strict-control   false\n   port-offset           0\n\
+      \   control-session-pps   300\n   admin-tech-on-failure\n   sp-organization-name\
+      \  cml-sdwan-lab-tool\n   organization-name     cml-sdwan-lab-tool\n   port-hop\n\
+      \   track-transport\n   track-default-gateway\n   console-baud-rate     9600\n\
+      \   config-template-name  edge_basic\n   no on-demand enable\n   on-demand idle-timeout\
+      \ 10\n   vbond validator.sdwan.local port 12346\n  !\n  bfd default-dscp 48\n\
+      \  bfd app-route multiplier 6\n  bfd app-route poll-interval 600000\n  sslproxy\n\
+      \   no enable\n   rsa-key-modulus      2048\n   certificate-lifetime 730\n \
+      \  eckey-type           P256\n   ca-tp-label          PROXY-SIGNING-CA\n   settings\
+      \ expired-certificate  drop\n   settings untrusted-certificate drop\n   settings\
+      \ unknown-status       drop\n   settings certificate-revocation-check none\n\
+      \   settings unsupported-protocol-versions drop\n   settings unsupported-cipher-suites\
+      \ drop\n   settings failure-mode         close\n   settings minimum-tls-ver\
+      \      TLSv1\n   dual-side optimization enable\n  !\n  sdwan\n   interface GigabitEthernet1\n\
+      \    tunnel-interface\n     encapsulation ipsec weight 1\n     no border\n \
+      \    color biz-internet restrict\n     no last-resort-circuit\n     no low-bandwidth-link\n\
+      \     no vbond-as-stun-server\n     vmanage-connection-preference 5\n     port-hop\n\
+      \     carrier                       default\n     nat-refresh-interval     \
+      \     5\n     hello-interval                1000\n     hello-tolerance     \
+      \          12\n     no allow-service all\n     no allow-service bgp\n     allow-service\
+      \ dhcp\n     allow-service dns\n     allow-service icmp\n     no allow-service\
+      \ sshd\n     no allow-service netconf\n     no allow-service ntp\n     no allow-service\
+      \ ospf\n     no allow-service stun\n     allow-service https\n     no allow-service\
+      \ snmp\n     no allow-service bfd\n    exit\n   exit\n   interface GigabitEthernet2\n\
+      \    tunnel-interface\n     encapsulation ipsec weight 1\n     no border\n \
+      \    color mpls restrict\n     no low-bandwidth-link\n     no vbond-as-stun-server\n\
+      \     vmanage-connection-preference 5\n     port-hop\n     no allow-service\
+      \ all\n     no allow-service bgp\n     allow-service dhcp\n     allow-service\
+      \ dns\n     allow-service icmp\n     no allow-service sshd\n     no allow-service\
+      \ netconf\n     no allow-service ntp\n     no allow-service ospf\n     no allow-service\
+      \ stun\n     allow-service https\n     no allow-service snmp\n     no allow-service\
+      \ bfd\n    exit\n   exit\n   appqoe\n    no tcpopt enable\n    no dreopt enable\n\
+      \    no httpopt enable\n   !\n   ip load-sharing algorithm ip-and-ports\n  \
+      \ ipv6 load-sharing algorithm ip-and-ports\n   omp\n    no shutdown\n    send-path-limit\
+      \  4\n    ecmp-limit       4\n    graceful-restart\n    no as-dot-notation\n\
+      \    timers\n     holdtime               60\n     advertisement-interval 1\n\
+      \     graceful-restart-timer 43200\n     eor-timer              300\n    exit\n\
+      \    address-family ipv4 vrf 1\n    !\n    address-family ipv4\n     advertise\
+      \ connected\n     advertise static\n     distance 251\n    !\n    address-family\
+      \ ipv6\n     distance 251\n    !\n   !\n  !\n  service tcp-keepalives-in\n \
+      \ service tcp-keepalives-out\n  no service tcp-small-servers\n  no service udp-small-servers\n\
+      \  platform console serial\n  hostname Edge1\n  username admin privilege 15\
+      \ secret 9 $9$3vljIUWj7mv9FJ$uCbfDob7nvck.JMYv9poGbTmDpUhy6SdrPgUBjjOeiw\n \
+      \ vrf definition 1\n   description VPN 1\n   address-family ipv4\n    exit-address-family\n\
+      \   !\n   address-family ipv6\n    exit-address-family\n   !\n  !\n  global-address-family\
+      \ ipv4\n   exit-global-af\n  !\n  ip arp proxy disable\n  ip cef load-sharing\
+      \ algorithm include-ports source destination\n  ip dhcp excluded-address vrf\
+      \ 1 192.168.1.1\n  ip dhcp pool vrf-1-GigabitEthernet3\n   network 192.168.1.0\
+      \ 255.255.255.0\n   vrf 1\n   lease 1 0 0\n   default-router 192.168.1.1\n \
+      \  dns-server 172.16.1.254 1.1.1.1\n  exit\n  ip dhcp use hardware-address client-id\n\
+      \  no ip dhcp use class\n  ip dhcp use vrf remote\n  ip forward-protocol nd\n\
+      \  no ip forward-protocol udp\n  no ip ftp passive\n  ip name-server 172.16.1.254\
+      \ 172.16.2.254\n  ip name-server no-vrf 172.16.1.254 172.16.2.254\n  ip name-server\
+      \ vrf 1 172.16.1.254 1.1.1.1\n  ip name-server vrf 1 server-ip-list 1.1.1.1\
+      \ 172.16.1.254\n  ip route 0.0.0.0 0.0.0.0 172.16.1.254\n  ip route 0.0.0.0\
+      \ 0.0.0.0 172.16.2.254\n  ip bootp server\n  no ip source-route\n  no ip ssh\
+      \ bulk-mode\n  ip tcp RST-count 10 RST-window 5000\n  no ip http server\n  no\
+      \ ip http secure-server\n  no ip http ctc authentication\n  ip nat inside source\
+      \ list nat-dia-vpn-hop-access-list interface GigabitEthernet1 overload\n  ip\
+      \ nat translation tcp-timeout 3600\n  ip nat translation udp-timeout 60\n  ip\
+      \ nat route vrf 1 0.0.0.0 0.0.0.0 global\n  ip nat settings central-policy\n\
+      \  ipv6 cef load-sharing algorithm include-ports source destination\n  interface\
+      \ GigabitEthernet1\n   description   INET\n   no shutdown\n   arp timeout 1200\n\
+      \   ip address 172.16.1.1 255.255.255.0\n   no ip redirects\n   ip mtu    1500\n\
+      \   ip nat outside\n   load-interval 30\n   mtu           1500\n   negotiation\
+      \ auto\n  exit\n  interface GigabitEthernet2\n   description   MPLS\n   no shutdown\n\
+      \   arp timeout 1200\n   ip address 172.16.2.1 255.255.255.0\n   no ip redirects\n\
+      \   ip mtu    1500\n   load-interval 30\n   mtu           1500\n   negotiation\
+      \ auto\n  exit\n  interface GigabitEthernet3\n   description   LAN\n   no shutdown\n\
+      \   arp timeout 1200\n   vrf forwarding 1\n   ip address 192.168.1.1 255.255.255.0\n\
+      \   no ip redirects\n   ip mtu    1500\n   load-interval 30\n   mtu        \
+      \   1500\n   negotiation auto\n  exit\n  interface Tunnel1\n   no shutdown\n\
+      \   ip unnumbered GigabitEthernet1\n   no ip redirects\n   ipv6 unnumbered GigabitEthernet1\n\
+      \   no ipv6 redirects\n   tunnel source GigabitEthernet1\n   tunnel mode sdwan\n\
+      \  exit\n  interface Tunnel2\n   no shutdown\n   ip unnumbered GigabitEthernet2\n\
+      \   no ip redirects\n   ipv6 unnumbered GigabitEthernet2\n   no ipv6 redirects\n\
+      \   tunnel source GigabitEthernet2\n   tunnel mode sdwan\n  exit\n  clock timezone\
+      \ UTC 0 0\n  logging persistent size 104857600 filesize 10485760\n  logging\
+      \ buffered 512000\n  logging console\n  no logging queue-limit\n  aaa authentication\
+      \ login default local\n  aaa authorization exec default local\n  aaa server\
+      \ radius dynamic-author\n  !\n  radius-server cache expiry 24\n  no crypto ikev2\
+      \ diagnose error\n  no crypto isakmp diagnose error\n  no network-clock revertive\n\
+      \  snmp-server ifindex persist\n  fhrp version vrrp v2\n  line con 0\n   speed\
+      \    9600\n   stopbits 1\n  !\n  line vty 0 4\n   transport input ssh\n  !\n\
+      \  line vty 5 80\n   transport input ssh\n  !\n  no process cpu extended history\n\
+      \  no acc-gyro enable\n  no ignition sense\n  no ignition enable\n  lldp run\n\
+      \  nat64 translation timeout tcp 3600\n  nat64 translation timeout udp 300\n\
+      \ !\n!\n\n--===============1003419234728088307==--"
+    name: ciscosdwan_cloud_init.cfg
+  cpu_limit: null
+  cpus: null
+  data_volume: null
+  hide_links: false
+  id: n9
+  image_definition: cat-sdwan-edge-17.18.01a
+  interfaces:
+  - id: i0
+    label: Loopback0
+    mac_address: null
+    type: loopback
+  - id: i1
+    label: GigabitEthernet1
+    mac_address: null
+    slot: 0
+    type: physical
+  - id: i2
+    label: GigabitEthernet2
+    mac_address: null
+    slot: 1
+    type: physical
+  - id: i3
+    label: GigabitEthernet3
+    mac_address: null
+    slot: 2
+    type: physical
+  - id: i4
+    label: GigabitEthernet4
+    mac_address: null
+    slot: 3
+    type: physical
+  - id: i5
+    label: GigabitEthernet5
+    mac_address: null
+    slot: 4
+    type: physical
+  - id: i6
+    label: GigabitEthernet6
+    mac_address: null
+    slot: 5
+    type: physical
+  - id: i7
+    label: GigabitEthernet7
+    mac_address: null
+    slot: 6
+    type: physical
+  - id: i8
+    label: GigabitEthernet8
+    mac_address: null
+    slot: 7
+    type: physical
+  label: Edge1
+  node_definition: cat-sdwan-edge
+  parameters: {}
+  ram: null
+  tags: []
+  x: -280
+  y: 400
+- boot_disk_size: null
+  configuration:
+  - content: "Content-Type: multipart/mixed; boundary=\"===============2666435036592460926==\"\
+      \nMIME-Version: 1.0\n\n--===============2666435036592460926==\nContent-Type:\
+      \ text/cloud-config; charset=\"us-ascii\"\nMIME-Version: 1.0\nContent-Transfer-Encoding:\
+      \ 7bit\nContent-Disposition: attachment; filename=\"tmps9u_2gez\"\n\n#cloud-config\n\
+      vinitparam:\n - uuid : C8K-D4CE7174-5261-7E6F-91EA-4926BCF4C2DD\n - otp : 080881aa57c64f1d9f0cc47d03d803de\n\
+      \ - vbond : validator.sdwan.local\n - org : cml-sdwan-lab-tool\n - rcc : true\n\
+      ca-certs:\n  remove-defaults: false\n  trusted:\n  - |\n   -----BEGIN CERTIFICATE-----\n\
+      \   MIIENDCCAxygAwIBAgIJAM1CyPPd8WmWMA0GCSqGSIb3DQEBBQUAMGgxCzAJBgNV\n   BAYTAlVTMRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3\n\
+      \   YW5fYXV0b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNv\n   bTAeFw0yMTEwMDkwODI5MzNaFw0zMTEwMDcwODI5MzNaMGgxCzAJBgNVBAYTAlVT\n\
+      \   MRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0\n   b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbTCCASIw\n\
+      \   DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALGDapA/Xvls8MTG5E5bo0RRfdYj\n   oXVmB6hSZfG1JYE6I7ynh4B7x2rYAt5m5xnINMnfkyTKq0lKaJTW5vpXcx+s7cL5\n\
+      \   i7vpiBGUAsWskCyPDw9oiroppvRkod1XRswtO4MeoVpFLiot3ZZ4m2UG744Zqn62\n   yjGaWAxXQ76Nv/IJmD0F+eLKqRqMZWRfh8IC1vg7TE96fwOWDWFFC17+H+1pdmlo\n\
+      \   9F23NUx8CGFyG3Ogid6yfJC/ZU/qRMzbbA9956IidoT5IKgSknd2D+CofloGdgF7\n   AUU/ThqzS8v43Xrl5DYnLbw6T90iGOaWosNF6syTwqmhzjFcMDJvQoov2PkCAwEA\n\
+      \   AaOB4DCB3TAPBgNVHRMBAf8EBTADAQH/MA4GA1UdDwEB/wQEAwIBBjAdBgNVHQ4E\n   FgQULBvXiVhzoYYk2HaiBireHejs5dUwgZoGA1UdIwSBkjCBj4AUjwz0pB+b2kwI\n\
+      \   nsqbUgDceAU0E6ihbKRqMGgxCzAJBgNVBAYTAlVTMRowGAYDVQQKDBFDaXNjbyBT\n   eXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0b3BvZDElMCMGA1UEAwwcc2ln\n\
+      \   bi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbYIJAL4ojZsLoCbyMA0GCSqGSIb3DQEB\n   BQUAA4IBAQDDYesnSuh+1AgruQvvAeQYOiC+cefc2Yy7u5xV1EVvD93hQBKvkajM\n\
+      \   x3Ovf44ISc2CDeD6NzQbl4pgrh2fZLb9sO2lV6XvG6G3G441vR4RNP2BU5Oc6AW0\n   HK2gKDrzanptMQwS5Rjxg0IbvL7FsbcvW2lNRucXKcb3jWivXcLGr+mkE+tvWZNk\n\
+      \   Z+gRQ27WJbrlqDFsqR6Xp0YyfGUCW4MxN9ThFVcN316lZ9HBoKP4UeRmGW+OOsLd\n   2uaLKkrIuTnA1q+qH0JqGz2/wLmR9cChwzTv8QH7aA0QEIi9Pc1M1PLc8BYNA0S+\n\
+      \   q+ZMrVqTNy2rwopE+4weCoXyC1W9fycA\n   -----END CERTIFICATE-----\n   -----BEGIN\
+      \ CERTIFICATE-----\n   MIIENDCCAxygAwIBAgIJAL4ojZsLoCbyMA0GCSqGSIb3DQEBCwUAMGgxCzAJBgNV\n\
+      \   BAYTAlVTMRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3\n   YW5fYXV0b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNv\n\
+      \   bTAeFw0yMTEwMDkwODI4NDdaFw0zMTEwMDcwODI4NDdaMGgxCzAJBgNVBAYTAlVT\n   MRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0\n\
+      \   b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbTCCASIw\n   DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANT90lMiYJqpCTvCj8yTBvBW8Gxk\n\
+      \   FSs4j4EE+5GG29/EdedU1z4LkwBM524/oaZWsWmbeOabqDSAV8679blkrarxqeup\n   DLpkChLDLq1w695+SDzBUByVlrI/5RCS68fTAkeXZ4AvlPt6WpS0xh21YNXHzeL2\n\
+      \   v5fCaYUDODlVWng/7Yk+8GJD4+jj9YWO/PNWtl7kVo3JqlIaGGPpm2Hrzu+QDoTe\n   j2OR8j77orHmBc1Z0XAIoyao7PM/bV/P+iuQna1RSFvxau1c+EE7UpUG3X+Fx0Ar\n\
+      \   mdVkQYAobfwZ82J8pnI87m52PmzFJi+mxEKEYyiu6P9mMsgvfZ/pyKXXyXkCAwEA\n   AaOB4DCB3TAdBgNVHQ4EFgQUjwz0pB+b2kwInsqbUgDceAU0E6gwgZoGA1UdIwSB\n\
+      \   kjCBj4AUjwz0pB+b2kwInsqbUgDceAU0E6ihbKRqMGgxCzAJBgNVBAYTAlVTMRow\n   GAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0b3Bv\n\
+      \   ZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbYIJAL4ojZsL\n   oCbyMA8GA1UdEwEB/wQFMAMBAf8wDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3DQEB\n\
+      \   CwUAA4IBAQB2frThMtZSiP2Lb/WjIG700cUjzPp7H6sIkJhEQEsQCDN4OGQa0Equ\n   tEMn16sjVhDZ5VXMYYB83u1jdAzhNJM2VvmYWvz2xcK6ZR5POwek5meTx71LMtDu\n\
+      \   pLYVBsmtVaWSUNpFpD8gRIV8DFHrsEqFRE9JKIPyRN+DiElmkOPnz0VQovApwhqt\n   48xyhsilGbJS22NsfSMnXw7JipZdaa8B7/q4BhVggPBOB+LTV+amb7kwsN8LRZDc\n\
+      \   Cai98VAOBOHrlPpymZ+hajj6aZ/oulU28i/qsGVZVyyawc7xMQjsdLvE0Iw21X56\n   ftwJNKPlej8RTVOK2Redbal5l/mgkCKX\n\
+      \   -----END CERTIFICATE-----\n\n--===============2666435036592460926==\nContent-Type:\
+      \ text/cloud-boothook; charset=\"us-ascii\"\nMIME-Version: 1.0\nContent-Transfer-Encoding:\
+      \ 7bit\nContent-Disposition: attachment; filename=\"config-C8K-D4CE7174-5261-7E6F-91EA-4926BCF4C2DD.txt\"\
+      \n\n#cloud-boothook\nconfig\n  system\n   ztp-status            success\n  \
+      \ pseudo-confirm-commit 300\n   personality           vedge\n   device-model\
+      \          vedge-C8000V\n   chassis-number        C8K-D4CE7174-5261-7E6F-91EA-4926BCF4C2DD\n\
+      \   system-ip             10.0.0.2\n   overlay-id            1\n   site-id \
+      \              2\n   ipv6-strict-control   false\n   port-offset           0\n\
+      \   control-session-pps   300\n   admin-tech-on-failure\n   sp-organization-name\
+      \  cml-sdwan-lab-tool\n   organization-name     cml-sdwan-lab-tool\n   port-hop\n\
+      \   track-transport\n   track-default-gateway\n   console-baud-rate     9600\n\
+      \   config-template-name  edge_basic\n   no on-demand enable\n   on-demand idle-timeout\
+      \ 10\n   vbond validator.sdwan.local port 12346\n  !\n  bfd default-dscp 48\n\
+      \  bfd app-route multiplier 6\n  bfd app-route poll-interval 600000\n  sslproxy\n\
+      \   no enable\n   rsa-key-modulus      2048\n   certificate-lifetime 730\n \
+      \  eckey-type           P256\n   ca-tp-label          PROXY-SIGNING-CA\n   settings\
+      \ expired-certificate  drop\n   settings untrusted-certificate drop\n   settings\
+      \ unknown-status       drop\n   settings certificate-revocation-check none\n\
+      \   settings unsupported-protocol-versions drop\n   settings unsupported-cipher-suites\
+      \ drop\n   settings failure-mode         close\n   settings minimum-tls-ver\
+      \      TLSv1\n   dual-side optimization enable\n  !\n  sdwan\n   interface GigabitEthernet1\n\
+      \    tunnel-interface\n     encapsulation ipsec weight 1\n     no border\n \
+      \    color biz-internet restrict\n     no last-resort-circuit\n     no low-bandwidth-link\n\
+      \     no vbond-as-stun-server\n     vmanage-connection-preference 5\n     port-hop\n\
+      \     carrier                       default\n     nat-refresh-interval     \
+      \     5\n     hello-interval                1000\n     hello-tolerance     \
+      \          12\n     no allow-service all\n     no allow-service bgp\n     allow-service\
+      \ dhcp\n     allow-service dns\n     allow-service icmp\n     no allow-service\
+      \ sshd\n     no allow-service netconf\n     no allow-service ntp\n     no allow-service\
+      \ ospf\n     no allow-service stun\n     allow-service https\n     no allow-service\
+      \ snmp\n     no allow-service bfd\n    exit\n   exit\n   interface GigabitEthernet2\n\
+      \    tunnel-interface\n     encapsulation ipsec weight 1\n     no border\n \
+      \    color mpls restrict\n     no low-bandwidth-link\n     no vbond-as-stun-server\n\
+      \     vmanage-connection-preference 5\n     port-hop\n     no allow-service\
+      \ all\n     no allow-service bgp\n     allow-service dhcp\n     allow-service\
+      \ dns\n     allow-service icmp\n     no allow-service sshd\n     no allow-service\
+      \ netconf\n     no allow-service ntp\n     no allow-service ospf\n     no allow-service\
+      \ stun\n     allow-service https\n     no allow-service snmp\n     no allow-service\
+      \ bfd\n    exit\n   exit\n   appqoe\n    no tcpopt enable\n    no dreopt enable\n\
+      \    no httpopt enable\n   !\n   ip load-sharing algorithm ip-and-ports\n  \
+      \ ipv6 load-sharing algorithm ip-and-ports\n   omp\n    no shutdown\n    send-path-limit\
+      \  4\n    ecmp-limit       4\n    graceful-restart\n    no as-dot-notation\n\
+      \    timers\n     holdtime               60\n     advertisement-interval 1\n\
+      \     graceful-restart-timer 43200\n     eor-timer              300\n    exit\n\
+      \    address-family ipv4 vrf 1\n    !\n    address-family ipv4\n     advertise\
+      \ connected\n     advertise static\n     distance 251\n    !\n    address-family\
+      \ ipv6\n     distance 251\n    !\n   !\n  !\n  service tcp-keepalives-in\n \
+      \ service tcp-keepalives-out\n  no service tcp-small-servers\n  no service udp-small-servers\n\
+      \  platform console serial\n  hostname Edge2\n  username admin privilege 15\
+      \ secret 9 $9$zDsiw55EQSj4fD$mHMTLwPsslTADWC2.GS8lFf72362la2JBV90EBtWopw\n \
+      \ vrf definition 1\n   description VPN 1\n   address-family ipv4\n    exit-address-family\n\
+      \   !\n   address-family ipv6\n    exit-address-family\n   !\n  !\n  global-address-family\
+      \ ipv4\n   exit-global-af\n  !\n  ip arp proxy disable\n  ip cef load-sharing\
+      \ algorithm include-ports source destination\n  ip dhcp excluded-address vrf\
+      \ 1 192.168.2.1\n  ip dhcp pool vrf-1-GigabitEthernet3\n   network 192.168.2.0\
+      \ 255.255.255.0\n   vrf 1\n   lease 1 0 0\n   default-router 192.168.2.1\n \
+      \  dns-server 172.16.1.254 1.1.1.1\n  exit\n  ip dhcp use hardware-address client-id\n\
+      \  no ip dhcp use class\n  ip dhcp use vrf remote\n  ip forward-protocol nd\n\
+      \  no ip forward-protocol udp\n  no ip ftp passive\n  ip name-server 172.16.1.254\
+      \ 172.16.2.254\n  ip name-server no-vrf 172.16.1.254 172.16.2.254\n  ip name-server\
+      \ vrf 1 172.16.1.254 1.1.1.1\n  ip name-server vrf 1 server-ip-list 1.1.1.1\
+      \ 172.16.1.254\n  ip route 0.0.0.0 0.0.0.0 172.16.1.254\n  ip route 0.0.0.0\
+      \ 0.0.0.0 172.16.2.254\n  ip bootp server\n  no ip source-route\n  no ip ssh\
+      \ bulk-mode\n  ip tcp RST-count 10 RST-window 5000\n  no ip http server\n  no\
+      \ ip http secure-server\n  no ip http ctc authentication\n  ip nat inside source\
+      \ list nat-dia-vpn-hop-access-list interface GigabitEthernet1 overload\n  ip\
+      \ nat translation tcp-timeout 3600\n  ip nat translation udp-timeout 60\n  ip\
+      \ nat route vrf 1 0.0.0.0 0.0.0.0 global\n  ip nat settings central-policy\n\
+      \  ipv6 cef load-sharing algorithm include-ports source destination\n  interface\
+      \ GigabitEthernet1\n   description   INET\n   no shutdown\n   arp timeout 1200\n\
+      \   ip address 172.16.1.2 255.255.255.0\n   no ip redirects\n   ip mtu    1500\n\
+      \   ip nat outside\n   load-interval 30\n   mtu           1500\n   negotiation\
+      \ auto\n  exit\n  interface GigabitEthernet2\n   description   MPLS\n   no shutdown\n\
+      \   arp timeout 1200\n   ip address 172.16.2.2 255.255.255.0\n   no ip redirects\n\
+      \   ip mtu    1500\n   load-interval 30\n   mtu           1500\n   negotiation\
+      \ auto\n  exit\n  interface GigabitEthernet3\n   description   LAN\n   no shutdown\n\
+      \   arp timeout 1200\n   vrf forwarding 1\n   ip address 192.168.2.1 255.255.255.0\n\
+      \   no ip redirects\n   ip mtu    1500\n   load-interval 30\n   mtu        \
+      \   1500\n   negotiation auto\n  exit\n  interface Tunnel1\n   no shutdown\n\
+      \   ip unnumbered GigabitEthernet1\n   no ip redirects\n   ipv6 unnumbered GigabitEthernet1\n\
+      \   no ipv6 redirects\n   tunnel source GigabitEthernet1\n   tunnel mode sdwan\n\
+      \  exit\n  interface Tunnel2\n   no shutdown\n   ip unnumbered GigabitEthernet2\n\
+      \   no ip redirects\n   ipv6 unnumbered GigabitEthernet2\n   no ipv6 redirects\n\
+      \   tunnel source GigabitEthernet2\n   tunnel mode sdwan\n  exit\n  clock timezone\
+      \ UTC 0 0\n  logging persistent size 104857600 filesize 10485760\n  logging\
+      \ buffered 512000\n  logging console\n  no logging queue-limit\n  aaa authentication\
+      \ login default local\n  aaa authorization exec default local\n  aaa server\
+      \ radius dynamic-author\n  !\n  radius-server cache expiry 24\n  no crypto ikev2\
+      \ diagnose error\n  no crypto isakmp diagnose error\n  no network-clock revertive\n\
+      \  snmp-server ifindex persist\n  fhrp version vrrp v2\n  line con 0\n   speed\
+      \    9600\n   stopbits 1\n  !\n  line vty 0 4\n   transport input ssh\n  !\n\
+      \  line vty 5 80\n   transport input ssh\n  !\n  no process cpu extended history\n\
+      \  no acc-gyro enable\n  no ignition sense\n  no ignition enable\n  lldp run\n\
+      \  nat64 translation timeout tcp 3600\n  nat64 translation timeout udp 300\n\
+      \ !\n!\n\n--===============2666435036592460926==--"
+    name: ciscosdwan_cloud_init.cfg
+  cpu_limit: null
+  cpus: null
+  data_volume: null
+  hide_links: false
+  id: n10
+  image_definition: cat-sdwan-edge-17.18.01a
+  interfaces:
+  - id: i0
+    label: Loopback0
+    mac_address: null
+    type: loopback
+  - id: i1
+    label: GigabitEthernet1
+    mac_address: null
+    slot: 0
+    type: physical
+  - id: i2
+    label: GigabitEthernet2
+    mac_address: null
+    slot: 1
+    type: physical
+  - id: i3
+    label: GigabitEthernet3
+    mac_address: null
+    slot: 2
+    type: physical
+  - id: i4
+    label: GigabitEthernet4
+    mac_address: null
+    slot: 3
+    type: physical
+  - id: i5
+    label: GigabitEthernet5
+    mac_address: null
+    slot: 4
+    type: physical
+  - id: i6
+    label: GigabitEthernet6
+    mac_address: null
+    slot: 5
+    type: physical
+  - id: i7
+    label: GigabitEthernet7
+    mac_address: null
+    slot: 6
+    type: physical
+  - id: i8
+    label: GigabitEthernet8
+    mac_address: null
+    slot: 7
+    type: physical
+  label: Edge2
+  node_definition: cat-sdwan-edge
+  parameters: {}
+  ram: null
+  tags: []
+  x: -160
+  y: 400
+- boot_disk_size: null
+  configuration:
+  - content: "Content-Type: multipart/mixed; boundary=\"===============2769481322634311690==\"\
+      \nMIME-Version: 1.0\n\n--===============2769481322634311690==\nContent-Type:\
+      \ text/cloud-config; charset=\"us-ascii\"\nMIME-Version: 1.0\nContent-Transfer-Encoding:\
+      \ 7bit\nContent-Disposition: attachment; filename=\"tmpwnnpzl1k\"\n\n#cloud-config\n\
+      vinitparam:\n - uuid : C8K-27148AFE-7160-69D3-ACC5-F77560530D63\n - otp : 9b4ad8d1a1604a6a80d7d27acc1b843d\n\
+      \ - vbond : validator.sdwan.local\n - org : cml-sdwan-lab-tool\n - rcc : true\n\
+      ca-certs:\n  remove-defaults: false\n  trusted:\n  - |\n   -----BEGIN CERTIFICATE-----\n\
+      \   MIIENDCCAxygAwIBAgIJAM1CyPPd8WmWMA0GCSqGSIb3DQEBBQUAMGgxCzAJBgNV\n   BAYTAlVTMRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3\n\
+      \   YW5fYXV0b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNv\n   bTAeFw0yMTEwMDkwODI5MzNaFw0zMTEwMDcwODI5MzNaMGgxCzAJBgNVBAYTAlVT\n\
+      \   MRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0\n   b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbTCCASIw\n\
+      \   DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALGDapA/Xvls8MTG5E5bo0RRfdYj\n   oXVmB6hSZfG1JYE6I7ynh4B7x2rYAt5m5xnINMnfkyTKq0lKaJTW5vpXcx+s7cL5\n\
+      \   i7vpiBGUAsWskCyPDw9oiroppvRkod1XRswtO4MeoVpFLiot3ZZ4m2UG744Zqn62\n   yjGaWAxXQ76Nv/IJmD0F+eLKqRqMZWRfh8IC1vg7TE96fwOWDWFFC17+H+1pdmlo\n\
+      \   9F23NUx8CGFyG3Ogid6yfJC/ZU/qRMzbbA9956IidoT5IKgSknd2D+CofloGdgF7\n   AUU/ThqzS8v43Xrl5DYnLbw6T90iGOaWosNF6syTwqmhzjFcMDJvQoov2PkCAwEA\n\
+      \   AaOB4DCB3TAPBgNVHRMBAf8EBTADAQH/MA4GA1UdDwEB/wQEAwIBBjAdBgNVHQ4E\n   FgQULBvXiVhzoYYk2HaiBireHejs5dUwgZoGA1UdIwSBkjCBj4AUjwz0pB+b2kwI\n\
+      \   nsqbUgDceAU0E6ihbKRqMGgxCzAJBgNVBAYTAlVTMRowGAYDVQQKDBFDaXNjbyBT\n   eXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0b3BvZDElMCMGA1UEAwwcc2ln\n\
+      \   bi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbYIJAL4ojZsLoCbyMA0GCSqGSIb3DQEB\n   BQUAA4IBAQDDYesnSuh+1AgruQvvAeQYOiC+cefc2Yy7u5xV1EVvD93hQBKvkajM\n\
+      \   x3Ovf44ISc2CDeD6NzQbl4pgrh2fZLb9sO2lV6XvG6G3G441vR4RNP2BU5Oc6AW0\n   HK2gKDrzanptMQwS5Rjxg0IbvL7FsbcvW2lNRucXKcb3jWivXcLGr+mkE+tvWZNk\n\
+      \   Z+gRQ27WJbrlqDFsqR6Xp0YyfGUCW4MxN9ThFVcN316lZ9HBoKP4UeRmGW+OOsLd\n   2uaLKkrIuTnA1q+qH0JqGz2/wLmR9cChwzTv8QH7aA0QEIi9Pc1M1PLc8BYNA0S+\n\
+      \   q+ZMrVqTNy2rwopE+4weCoXyC1W9fycA\n   -----END CERTIFICATE-----\n   -----BEGIN\
+      \ CERTIFICATE-----\n   MIIENDCCAxygAwIBAgIJAL4ojZsLoCbyMA0GCSqGSIb3DQEBCwUAMGgxCzAJBgNV\n\
+      \   BAYTAlVTMRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3\n   YW5fYXV0b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNv\n\
+      \   bTAeFw0yMTEwMDkwODI4NDdaFw0zMTEwMDcwODI4NDdaMGgxCzAJBgNVBAYTAlVT\n   MRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0\n\
+      \   b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbTCCASIw\n   DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANT90lMiYJqpCTvCj8yTBvBW8Gxk\n\
+      \   FSs4j4EE+5GG29/EdedU1z4LkwBM524/oaZWsWmbeOabqDSAV8679blkrarxqeup\n   DLpkChLDLq1w695+SDzBUByVlrI/5RCS68fTAkeXZ4AvlPt6WpS0xh21YNXHzeL2\n\
+      \   v5fCaYUDODlVWng/7Yk+8GJD4+jj9YWO/PNWtl7kVo3JqlIaGGPpm2Hrzu+QDoTe\n   j2OR8j77orHmBc1Z0XAIoyao7PM/bV/P+iuQna1RSFvxau1c+EE7UpUG3X+Fx0Ar\n\
+      \   mdVkQYAobfwZ82J8pnI87m52PmzFJi+mxEKEYyiu6P9mMsgvfZ/pyKXXyXkCAwEA\n   AaOB4DCB3TAdBgNVHQ4EFgQUjwz0pB+b2kwInsqbUgDceAU0E6gwgZoGA1UdIwSB\n\
+      \   kjCBj4AUjwz0pB+b2kwInsqbUgDceAU0E6ihbKRqMGgxCzAJBgNVBAYTAlVTMRow\n   GAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0b3Bv\n\
+      \   ZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbYIJAL4ojZsL\n   oCbyMA8GA1UdEwEB/wQFMAMBAf8wDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3DQEB\n\
+      \   CwUAA4IBAQB2frThMtZSiP2Lb/WjIG700cUjzPp7H6sIkJhEQEsQCDN4OGQa0Equ\n   tEMn16sjVhDZ5VXMYYB83u1jdAzhNJM2VvmYWvz2xcK6ZR5POwek5meTx71LMtDu\n\
+      \   pLYVBsmtVaWSUNpFpD8gRIV8DFHrsEqFRE9JKIPyRN+DiElmkOPnz0VQovApwhqt\n   48xyhsilGbJS22NsfSMnXw7JipZdaa8B7/q4BhVggPBOB+LTV+amb7kwsN8LRZDc\n\
+      \   Cai98VAOBOHrlPpymZ+hajj6aZ/oulU28i/qsGVZVyyawc7xMQjsdLvE0Iw21X56\n   ftwJNKPlej8RTVOK2Redbal5l/mgkCKX\n\
+      \   -----END CERTIFICATE-----\n\n--===============2769481322634311690==\nContent-Type:\
+      \ text/cloud-boothook; charset=\"us-ascii\"\nMIME-Version: 1.0\nContent-Transfer-Encoding:\
+      \ 7bit\nContent-Disposition: attachment; filename=\"config-C8K-27148AFE-7160-69D3-ACC5-F77560530D63.txt\"\
+      \n\n#cloud-boothook\nconfig\n  system\n   ztp-status            success\n  \
+      \ pseudo-confirm-commit 300\n   personality           vedge\n   device-model\
+      \          vedge-C8000V\n   chassis-number        C8K-27148AFE-7160-69D3-ACC5-F77560530D63\n\
+      \   system-ip             10.0.0.3\n   overlay-id            1\n   site-id \
+      \              3\n   ipv6-strict-control   false\n   port-offset           0\n\
+      \   control-session-pps   300\n   admin-tech-on-failure\n   sp-organization-name\
+      \  cml-sdwan-lab-tool\n   organization-name     cml-sdwan-lab-tool\n   port-hop\n\
+      \   track-transport\n   track-default-gateway\n   console-baud-rate     9600\n\
+      \   config-template-name  edge_basic\n   no on-demand enable\n   on-demand idle-timeout\
+      \ 10\n   vbond validator.sdwan.local port 12346\n  !\n  bfd default-dscp 48\n\
+      \  bfd app-route multiplier 6\n  bfd app-route poll-interval 600000\n  sslproxy\n\
+      \   no enable\n   rsa-key-modulus      2048\n   certificate-lifetime 730\n \
+      \  eckey-type           P256\n   ca-tp-label          PROXY-SIGNING-CA\n   settings\
+      \ expired-certificate  drop\n   settings untrusted-certificate drop\n   settings\
+      \ unknown-status       drop\n   settings certificate-revocation-check none\n\
+      \   settings unsupported-protocol-versions drop\n   settings unsupported-cipher-suites\
+      \ drop\n   settings failure-mode         close\n   settings minimum-tls-ver\
+      \      TLSv1\n   dual-side optimization enable\n  !\n  sdwan\n   interface GigabitEthernet1\n\
+      \    tunnel-interface\n     encapsulation ipsec weight 1\n     no border\n \
+      \    color biz-internet restrict\n     no last-resort-circuit\n     no low-bandwidth-link\n\
+      \     no vbond-as-stun-server\n     vmanage-connection-preference 5\n     port-hop\n\
+      \     carrier                       default\n     nat-refresh-interval     \
+      \     5\n     hello-interval                1000\n     hello-tolerance     \
+      \          12\n     no allow-service all\n     no allow-service bgp\n     allow-service\
+      \ dhcp\n     allow-service dns\n     allow-service icmp\n     no allow-service\
+      \ sshd\n     no allow-service netconf\n     no allow-service ntp\n     no allow-service\
+      \ ospf\n     no allow-service stun\n     allow-service https\n     no allow-service\
+      \ snmp\n     no allow-service bfd\n    exit\n   exit\n   interface GigabitEthernet2\n\
+      \    tunnel-interface\n     encapsulation ipsec weight 1\n     no border\n \
+      \    color mpls restrict\n     no low-bandwidth-link\n     no vbond-as-stun-server\n\
+      \     vmanage-connection-preference 5\n     port-hop\n     no allow-service\
+      \ all\n     no allow-service bgp\n     allow-service dhcp\n     allow-service\
+      \ dns\n     allow-service icmp\n     no allow-service sshd\n     no allow-service\
+      \ netconf\n     no allow-service ntp\n     no allow-service ospf\n     no allow-service\
+      \ stun\n     allow-service https\n     no allow-service snmp\n     no allow-service\
+      \ bfd\n    exit\n   exit\n   appqoe\n    no tcpopt enable\n    no dreopt enable\n\
+      \    no httpopt enable\n   !\n   ip load-sharing algorithm ip-and-ports\n  \
+      \ ipv6 load-sharing algorithm ip-and-ports\n   omp\n    no shutdown\n    send-path-limit\
+      \  4\n    ecmp-limit       4\n    graceful-restart\n    no as-dot-notation\n\
+      \    timers\n     holdtime               60\n     advertisement-interval 1\n\
+      \     graceful-restart-timer 43200\n     eor-timer              300\n    exit\n\
+      \    address-family ipv4 vrf 1\n    !\n    address-family ipv4\n     advertise\
+      \ connected\n     advertise static\n     distance 251\n    !\n    address-family\
+      \ ipv6\n     distance 251\n    !\n   !\n  !\n  service tcp-keepalives-in\n \
+      \ service tcp-keepalives-out\n  no service tcp-small-servers\n  no service udp-small-servers\n\
+      \  platform console serial\n  hostname Edge3\n  username admin privilege 15\
+      \ secret 9 $9$oPnoECk75aSoTS$ezmodNywpeoWm9a6nZpKMYP/E812H/TNJx3cLRd2VbM\n \
+      \ vrf definition 1\n   description VPN 1\n   address-family ipv4\n    exit-address-family\n\
+      \   !\n   address-family ipv6\n    exit-address-family\n   !\n  !\n  global-address-family\
+      \ ipv4\n   exit-global-af\n  !\n  ip arp proxy disable\n  ip cef load-sharing\
+      \ algorithm include-ports source destination\n  ip dhcp excluded-address vrf\
+      \ 1 192.168.3.1\n  ip dhcp pool vrf-1-GigabitEthernet3\n   network 192.168.3.0\
+      \ 255.255.255.0\n   vrf 1\n   lease 1 0 0\n   default-router 192.168.3.1\n \
+      \  dns-server 172.16.1.254 1.1.1.1\n  exit\n  ip dhcp use hardware-address client-id\n\
+      \  no ip dhcp use class\n  ip dhcp use vrf remote\n  ip forward-protocol nd\n\
+      \  no ip forward-protocol udp\n  no ip ftp passive\n  ip name-server 172.16.1.254\
+      \ 172.16.2.254\n  ip name-server no-vrf 172.16.1.254 172.16.2.254\n  ip name-server\
+      \ vrf 1 172.16.1.254 1.1.1.1\n  ip name-server vrf 1 server-ip-list 1.1.1.1\
+      \ 172.16.1.254\n  ip route 0.0.0.0 0.0.0.0 172.16.1.254\n  ip route 0.0.0.0\
+      \ 0.0.0.0 172.16.2.254\n  ip bootp server\n  no ip source-route\n  no ip ssh\
+      \ bulk-mode\n  ip tcp RST-count 10 RST-window 5000\n  no ip http server\n  no\
+      \ ip http secure-server\n  no ip http ctc authentication\n  ip nat inside source\
+      \ list nat-dia-vpn-hop-access-list interface GigabitEthernet1 overload\n  ip\
+      \ nat translation tcp-timeout 3600\n  ip nat translation udp-timeout 60\n  ip\
+      \ nat route vrf 1 0.0.0.0 0.0.0.0 global\n  ip nat settings central-policy\n\
+      \  ipv6 cef load-sharing algorithm include-ports source destination\n  interface\
+      \ GigabitEthernet1\n   description   INET\n   no shutdown\n   arp timeout 1200\n\
+      \   ip address 172.16.1.3 255.255.255.0\n   no ip redirects\n   ip mtu    1500\n\
+      \   ip nat outside\n   load-interval 30\n   mtu           1500\n   negotiation\
+      \ auto\n  exit\n  interface GigabitEthernet2\n   description   MPLS\n   no shutdown\n\
+      \   arp timeout 1200\n   ip address 172.16.2.3 255.255.255.0\n   no ip redirects\n\
+      \   ip mtu    1500\n   load-interval 30\n   mtu           1500\n   negotiation\
+      \ auto\n  exit\n  interface GigabitEthernet3\n   description   LAN\n   no shutdown\n\
+      \   arp timeout 1200\n   vrf forwarding 1\n   ip address 192.168.3.1 255.255.255.0\n\
+      \   no ip redirects\n   ip mtu    1500\n   load-interval 30\n   mtu        \
+      \   1500\n   negotiation auto\n  exit\n  interface Tunnel1\n   no shutdown\n\
+      \   ip unnumbered GigabitEthernet1\n   no ip redirects\n   ipv6 unnumbered GigabitEthernet1\n\
+      \   no ipv6 redirects\n   tunnel source GigabitEthernet1\n   tunnel mode sdwan\n\
+      \  exit\n  interface Tunnel2\n   no shutdown\n   ip unnumbered GigabitEthernet2\n\
+      \   no ip redirects\n   ipv6 unnumbered GigabitEthernet2\n   no ipv6 redirects\n\
+      \   tunnel source GigabitEthernet2\n   tunnel mode sdwan\n  exit\n  clock timezone\
+      \ UTC 0 0\n  logging persistent size 104857600 filesize 10485760\n  logging\
+      \ buffered 512000\n  logging console\n  no logging queue-limit\n  aaa authentication\
+      \ login default local\n  aaa authorization exec default local\n  aaa server\
+      \ radius dynamic-author\n  !\n  radius-server cache expiry 24\n  no crypto ikev2\
+      \ diagnose error\n  no crypto isakmp diagnose error\n  no network-clock revertive\n\
+      \  snmp-server ifindex persist\n  fhrp version vrrp v2\n  line con 0\n   speed\
+      \    9600\n   stopbits 1\n  !\n  line vty 0 4\n   transport input ssh\n  !\n\
+      \  line vty 5 80\n   transport input ssh\n  !\n  no process cpu extended history\n\
+      \  no acc-gyro enable\n  no ignition sense\n  no ignition enable\n  lldp run\n\
+      \  nat64 translation timeout tcp 3600\n  nat64 translation timeout udp 300\n\
+      \ !\n!\n\n--===============2769481322634311690==--"
+    name: ciscosdwan_cloud_init.cfg
+  cpu_limit: null
+  cpus: null
+  data_volume: null
+  hide_links: false
+  id: n11
+  image_definition: cat-sdwan-edge-17.18.01a
+  interfaces:
+  - id: i0
+    label: Loopback0
+    mac_address: null
+    type: loopback
+  - id: i1
+    label: GigabitEthernet1
+    mac_address: null
+    slot: 0
+    type: physical
+  - id: i2
+    label: GigabitEthernet2
+    mac_address: null
+    slot: 1
+    type: physical
+  - id: i3
+    label: GigabitEthernet3
+    mac_address: null
+    slot: 2
+    type: physical
+  - id: i4
+    label: GigabitEthernet4
+    mac_address: null
+    slot: 3
+    type: physical
+  - id: i5
+    label: GigabitEthernet5
+    mac_address: null
+    slot: 4
+    type: physical
+  - id: i6
+    label: GigabitEthernet6
+    mac_address: null
+    slot: 5
+    type: physical
+  - id: i7
+    label: GigabitEthernet7
+    mac_address: null
+    slot: 6
+    type: physical
+  - id: i8
+    label: GigabitEthernet8
+    mac_address: null
+    slot: 7
+    type: physical
+  label: Edge3
+  node_definition: cat-sdwan-edge
+  parameters: {}
+  ram: null
+  tags: []
+  x: -40
+  y: 400
+- boot_disk_size: null
+  configuration:
+  - content: "Content-Type: multipart/mixed; boundary=\"===============4016715628682066150==\"\
+      \nMIME-Version: 1.0\n\n--===============4016715628682066150==\nContent-Type:\
+      \ text/cloud-config; charset=\"us-ascii\"\nMIME-Version: 1.0\nContent-Transfer-Encoding:\
+      \ 7bit\nContent-Disposition: attachment; filename=\"tmpf270zkdh\"\n\n#cloud-config\n\
+      vinitparam:\n - uuid : C8K-3188FA44-8A8A-8392-0E4B-0DA5A445C10B\n - otp : 6026fe1762684c07a8621a9b3f4ed566\n\
+      \ - vbond : validator.sdwan.local\n - org : cml-sdwan-lab-tool\n - rcc : true\n\
+      ca-certs:\n  remove-defaults: false\n  trusted:\n  - |\n   -----BEGIN CERTIFICATE-----\n\
+      \   MIIENDCCAxygAwIBAgIJAM1CyPPd8WmWMA0GCSqGSIb3DQEBBQUAMGgxCzAJBgNV\n   BAYTAlVTMRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3\n\
+      \   YW5fYXV0b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNv\n   bTAeFw0yMTEwMDkwODI5MzNaFw0zMTEwMDcwODI5MzNaMGgxCzAJBgNVBAYTAlVT\n\
+      \   MRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0\n   b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbTCCASIw\n\
+      \   DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALGDapA/Xvls8MTG5E5bo0RRfdYj\n   oXVmB6hSZfG1JYE6I7ynh4B7x2rYAt5m5xnINMnfkyTKq0lKaJTW5vpXcx+s7cL5\n\
+      \   i7vpiBGUAsWskCyPDw9oiroppvRkod1XRswtO4MeoVpFLiot3ZZ4m2UG744Zqn62\n   yjGaWAxXQ76Nv/IJmD0F+eLKqRqMZWRfh8IC1vg7TE96fwOWDWFFC17+H+1pdmlo\n\
+      \   9F23NUx8CGFyG3Ogid6yfJC/ZU/qRMzbbA9956IidoT5IKgSknd2D+CofloGdgF7\n   AUU/ThqzS8v43Xrl5DYnLbw6T90iGOaWosNF6syTwqmhzjFcMDJvQoov2PkCAwEA\n\
+      \   AaOB4DCB3TAPBgNVHRMBAf8EBTADAQH/MA4GA1UdDwEB/wQEAwIBBjAdBgNVHQ4E\n   FgQULBvXiVhzoYYk2HaiBireHejs5dUwgZoGA1UdIwSBkjCBj4AUjwz0pB+b2kwI\n\
+      \   nsqbUgDceAU0E6ihbKRqMGgxCzAJBgNVBAYTAlVTMRowGAYDVQQKDBFDaXNjbyBT\n   eXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0b3BvZDElMCMGA1UEAwwcc2ln\n\
+      \   bi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbYIJAL4ojZsLoCbyMA0GCSqGSIb3DQEB\n   BQUAA4IBAQDDYesnSuh+1AgruQvvAeQYOiC+cefc2Yy7u5xV1EVvD93hQBKvkajM\n\
+      \   x3Ovf44ISc2CDeD6NzQbl4pgrh2fZLb9sO2lV6XvG6G3G441vR4RNP2BU5Oc6AW0\n   HK2gKDrzanptMQwS5Rjxg0IbvL7FsbcvW2lNRucXKcb3jWivXcLGr+mkE+tvWZNk\n\
+      \   Z+gRQ27WJbrlqDFsqR6Xp0YyfGUCW4MxN9ThFVcN316lZ9HBoKP4UeRmGW+OOsLd\n   2uaLKkrIuTnA1q+qH0JqGz2/wLmR9cChwzTv8QH7aA0QEIi9Pc1M1PLc8BYNA0S+\n\
+      \   q+ZMrVqTNy2rwopE+4weCoXyC1W9fycA\n   -----END CERTIFICATE-----\n   -----BEGIN\
+      \ CERTIFICATE-----\n   MIIENDCCAxygAwIBAgIJAL4ojZsLoCbyMA0GCSqGSIb3DQEBCwUAMGgxCzAJBgNV\n\
+      \   BAYTAlVTMRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3\n   YW5fYXV0b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNv\n\
+      \   bTAeFw0yMTEwMDkwODI4NDdaFw0zMTEwMDcwODI4NDdaMGgxCzAJBgNVBAYTAlVT\n   MRowGAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0\n\
+      \   b3BvZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbTCCASIw\n   DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANT90lMiYJqpCTvCj8yTBvBW8Gxk\n\
+      \   FSs4j4EE+5GG29/EdedU1z4LkwBM524/oaZWsWmbeOabqDSAV8679blkrarxqeup\n   DLpkChLDLq1w695+SDzBUByVlrI/5RCS68fTAkeXZ4AvlPt6WpS0xh21YNXHzeL2\n\
+      \   v5fCaYUDODlVWng/7Yk+8GJD4+jj9YWO/PNWtl7kVo3JqlIaGGPpm2Hrzu+QDoTe\n   j2OR8j77orHmBc1Z0XAIoyao7PM/bV/P+iuQna1RSFvxau1c+EE7UpUG3X+Fx0Ar\n\
+      \   mdVkQYAobfwZ82J8pnI87m52PmzFJi+mxEKEYyiu6P9mMsgvfZ/pyKXXyXkCAwEA\n   AaOB4DCB3TAdBgNVHQ4EFgQUjwz0pB+b2kwInsqbUgDceAU0E6gwgZoGA1UdIwSB\n\
+      \   kjCBj4AUjwz0pB+b2kwInsqbUgDceAU0E6ihbKRqMGgxCzAJBgNVBAYTAlVTMRow\n   GAYDVQQKDBFDaXNjbyBTeXN0ZW1zIEluYzEWMBQGA1UECwwNc2R3YW5fYXV0b3Bv\n\
+      \   ZDElMCMGA1UEAwwcc2lnbi5zZHdhbl9hdXRvcG9kLmNpc2NvLmNvbYIJAL4ojZsL\n   oCbyMA8GA1UdEwEB/wQFMAMBAf8wDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3DQEB\n\
+      \   CwUAA4IBAQB2frThMtZSiP2Lb/WjIG700cUjzPp7H6sIkJhEQEsQCDN4OGQa0Equ\n   tEMn16sjVhDZ5VXMYYB83u1jdAzhNJM2VvmYWvz2xcK6ZR5POwek5meTx71LMtDu\n\
+      \   pLYVBsmtVaWSUNpFpD8gRIV8DFHrsEqFRE9JKIPyRN+DiElmkOPnz0VQovApwhqt\n   48xyhsilGbJS22NsfSMnXw7JipZdaa8B7/q4BhVggPBOB+LTV+amb7kwsN8LRZDc\n\
+      \   Cai98VAOBOHrlPpymZ+hajj6aZ/oulU28i/qsGVZVyyawc7xMQjsdLvE0Iw21X56\n   ftwJNKPlej8RTVOK2Redbal5l/mgkCKX\n\
+      \   -----END CERTIFICATE-----\n\n--===============4016715628682066150==\nContent-Type:\
+      \ text/cloud-boothook; charset=\"us-ascii\"\nMIME-Version: 1.0\nContent-Transfer-Encoding:\
+      \ 7bit\nContent-Disposition: attachment; filename=\"config-C8K-3188FA44-8A8A-8392-0E4B-0DA5A445C10B.txt\"\
+      \n\n#cloud-boothook\nconfig\n  system\n   ztp-status            success\n  \
+      \ pseudo-confirm-commit 300\n   personality           vedge\n   device-model\
+      \          vedge-C8000V\n   chassis-number        C8K-3188FA44-8A8A-8392-0E4B-0DA5A445C10B\n\
+      \   system-ip             10.0.0.4\n   overlay-id            1\n   site-id \
+      \              4\n   ipv6-strict-control   false\n   port-offset           0\n\
+      \   control-session-pps   300\n   admin-tech-on-failure\n   sp-organization-name\
+      \  cml-sdwan-lab-tool\n   organization-name     cml-sdwan-lab-tool\n   port-hop\n\
+      \   track-transport\n   track-default-gateway\n   console-baud-rate     9600\n\
+      \   config-template-name  edge_basic\n   no on-demand enable\n   on-demand idle-timeout\
+      \ 10\n   vbond validator.sdwan.local port 12346\n  !\n  bfd default-dscp 48\n\
+      \  bfd app-route multiplier 6\n  bfd app-route poll-interval 600000\n  sslproxy\n\
+      \   no enable\n   rsa-key-modulus      2048\n   certificate-lifetime 730\n \
+      \  eckey-type           P256\n   ca-tp-label          PROXY-SIGNING-CA\n   settings\
+      \ expired-certificate  drop\n   settings untrusted-certificate drop\n   settings\
+      \ unknown-status       drop\n   settings certificate-revocation-check none\n\
+      \   settings unsupported-protocol-versions drop\n   settings unsupported-cipher-suites\
+      \ drop\n   settings failure-mode         close\n   settings minimum-tls-ver\
+      \      TLSv1\n   dual-side optimization enable\n  !\n  sdwan\n   interface GigabitEthernet1\n\
+      \    tunnel-interface\n     encapsulation ipsec weight 1\n     no border\n \
+      \    color biz-internet restrict\n     no last-resort-circuit\n     no low-bandwidth-link\n\
+      \     no vbond-as-stun-server\n     vmanage-connection-preference 5\n     port-hop\n\
+      \     carrier                       default\n     nat-refresh-interval     \
+      \     5\n     hello-interval                1000\n     hello-tolerance     \
+      \          12\n     no allow-service all\n     no allow-service bgp\n     allow-service\
+      \ dhcp\n     allow-service dns\n     allow-service icmp\n     no allow-service\
+      \ sshd\n     no allow-service netconf\n     no allow-service ntp\n     no allow-service\
+      \ ospf\n     no allow-service stun\n     allow-service https\n     no allow-service\
+      \ snmp\n     no allow-service bfd\n    exit\n   exit\n   interface GigabitEthernet2\n\
+      \    tunnel-interface\n     encapsulation ipsec weight 1\n     no border\n \
+      \    color mpls restrict\n     no low-bandwidth-link\n     no vbond-as-stun-server\n\
+      \     vmanage-connection-preference 5\n     port-hop\n     no allow-service\
+      \ all\n     no allow-service bgp\n     allow-service dhcp\n     allow-service\
+      \ dns\n     allow-service icmp\n     no allow-service sshd\n     no allow-service\
+      \ netconf\n     no allow-service ntp\n     no allow-service ospf\n     no allow-service\
+      \ stun\n     allow-service https\n     no allow-service snmp\n     no allow-service\
+      \ bfd\n    exit\n   exit\n   appqoe\n    no tcpopt enable\n    no dreopt enable\n\
+      \    no httpopt enable\n   !\n   ip load-sharing algorithm ip-and-ports\n  \
+      \ ipv6 load-sharing algorithm ip-and-ports\n   omp\n    no shutdown\n    send-path-limit\
+      \  4\n    ecmp-limit       4\n    graceful-restart\n    no as-dot-notation\n\
+      \    timers\n     holdtime               60\n     advertisement-interval 1\n\
+      \     graceful-restart-timer 43200\n     eor-timer              300\n    exit\n\
+      \    address-family ipv4 vrf 1\n    !\n    address-family ipv4\n     advertise\
+      \ connected\n     advertise static\n     distance 251\n    !\n    address-family\
+      \ ipv6\n     distance 251\n    !\n   !\n  !\n  service tcp-keepalives-in\n \
+      \ service tcp-keepalives-out\n  no service tcp-small-servers\n  no service udp-small-servers\n\
+      \  platform console serial\n  hostname Edge4\n  username admin privilege 15\
+      \ secret 9 $9$QSW7gdArPeuPRn$UClgj3A1YeX9tuXftFtQ3ErqrkZLPUcVFu3X7bLCHpk\n \
+      \ vrf definition 1\n   description VPN 1\n   address-family ipv4\n    exit-address-family\n\
+      \   !\n   address-family ipv6\n    exit-address-family\n   !\n  !\n  global-address-family\
+      \ ipv4\n   exit-global-af\n  !\n  ip arp proxy disable\n  ip cef load-sharing\
+      \ algorithm include-ports source destination\n  ip dhcp excluded-address vrf\
+      \ 1 192.168.4.1\n  ip dhcp pool vrf-1-GigabitEthernet3\n   network 192.168.4.0\
+      \ 255.255.255.0\n   vrf 1\n   lease 1 0 0\n   default-router 192.168.4.1\n \
+      \  dns-server 172.16.1.254 1.1.1.1\n  exit\n  ip dhcp use hardware-address client-id\n\
+      \  no ip dhcp use class\n  ip dhcp use vrf remote\n  ip forward-protocol nd\n\
+      \  no ip forward-protocol udp\n  no ip ftp passive\n  ip name-server 172.16.1.254\
+      \ 172.16.2.254\n  ip name-server no-vrf 172.16.1.254 172.16.2.254\n  ip name-server\
+      \ vrf 1 172.16.1.254 1.1.1.1\n  ip name-server vrf 1 server-ip-list 1.1.1.1\
+      \ 172.16.1.254\n  ip route 0.0.0.0 0.0.0.0 172.16.1.254\n  ip route 0.0.0.0\
+      \ 0.0.0.0 172.16.2.254\n  ip bootp server\n  no ip source-route\n  no ip ssh\
+      \ bulk-mode\n  ip tcp RST-count 10 RST-window 5000\n  no ip http server\n  no\
+      \ ip http secure-server\n  no ip http ctc authentication\n  ip nat inside source\
+      \ list nat-dia-vpn-hop-access-list interface GigabitEthernet1 overload\n  ip\
+      \ nat translation tcp-timeout 3600\n  ip nat translation udp-timeout 60\n  ip\
+      \ nat route vrf 1 0.0.0.0 0.0.0.0 global\n  ip nat settings central-policy\n\
+      \  ipv6 cef load-sharing algorithm include-ports source destination\n  interface\
+      \ GigabitEthernet1\n   description   INET\n   no shutdown\n   arp timeout 1200\n\
+      \   ip address 172.16.1.4 255.255.255.0\n   no ip redirects\n   ip mtu    1500\n\
+      \   ip nat outside\n   load-interval 30\n   mtu           1500\n   negotiation\
+      \ auto\n  exit\n  interface GigabitEthernet2\n   description   MPLS\n   no shutdown\n\
+      \   arp timeout 1200\n   ip address 172.16.2.4 255.255.255.0\n   no ip redirects\n\
+      \   ip mtu    1500\n   load-interval 30\n   mtu           1500\n   negotiation\
+      \ auto\n  exit\n  interface GigabitEthernet3\n   description   LAN\n   no shutdown\n\
+      \   arp timeout 1200\n   vrf forwarding 1\n   ip address 192.168.4.1 255.255.255.0\n\
+      \   no ip redirects\n   ip mtu    1500\n   load-interval 30\n   mtu        \
+      \   1500\n   negotiation auto\n  exit\n  interface Tunnel1\n   no shutdown\n\
+      \   ip unnumbered GigabitEthernet1\n   no ip redirects\n   ipv6 unnumbered GigabitEthernet1\n\
+      \   no ipv6 redirects\n   tunnel source GigabitEthernet1\n   tunnel mode sdwan\n\
+      \  exit\n  interface Tunnel2\n   no shutdown\n   ip unnumbered GigabitEthernet2\n\
+      \   no ip redirects\n   ipv6 unnumbered GigabitEthernet2\n   no ipv6 redirects\n\
+      \   tunnel source GigabitEthernet2\n   tunnel mode sdwan\n  exit\n  clock timezone\
+      \ UTC 0 0\n  logging persistent size 104857600 filesize 10485760\n  logging\
+      \ buffered 512000\n  logging console\n  no logging queue-limit\n  aaa authentication\
+      \ login default local\n  aaa authorization exec default local\n  aaa server\
+      \ radius dynamic-author\n  !\n  radius-server cache expiry 24\n  no crypto ikev2\
+      \ diagnose error\n  no crypto isakmp diagnose error\n  no network-clock revertive\n\
+      \  snmp-server ifindex persist\n  fhrp version vrrp v2\n  line con 0\n   speed\
+      \    9600\n   stopbits 1\n  !\n  line vty 0 4\n   transport input ssh\n  !\n\
+      \  line vty 5 80\n   transport input ssh\n  !\n  no process cpu extended history\n\
+      \  no acc-gyro enable\n  no ignition sense\n  no ignition enable\n  lldp run\n\
+      \  nat64 translation timeout tcp 3600\n  nat64 translation timeout udp 300\n\
+      \ !\n!\n\n--===============4016715628682066150==--"
+    name: ciscosdwan_cloud_init.cfg
+  cpu_limit: null
+  cpus: null
+  data_volume: null
+  hide_links: false
+  id: n12
+  image_definition: cat-sdwan-edge-17.18.01a
+  interfaces:
+  - id: i0
+    label: Loopback0
+    mac_address: null
+    type: loopback
+  - id: i1
+    label: GigabitEthernet1
+    mac_address: null
+    slot: 0
+    type: physical
+  - id: i2
+    label: GigabitEthernet2
+    mac_address: null
+    slot: 1
+    type: physical
+  - id: i3
+    label: GigabitEthernet3
+    mac_address: null
+    slot: 2
+    type: physical
+  - id: i4
+    label: GigabitEthernet4
+    mac_address: null
+    slot: 3
+    type: physical
+  - id: i5
+    label: GigabitEthernet5
+    mac_address: null
+    slot: 4
+    type: physical
+  - id: i6
+    label: GigabitEthernet6
+    mac_address: null
+    slot: 5
+    type: physical
+  - id: i7
+    label: GigabitEthernet7
+    mac_address: null
+    slot: 6
+    type: physical
+  - id: i8
+    label: GigabitEthernet8
+    mac_address: null
+    slot: 7
+    type: physical
+  label: Edge4
+  node_definition: cat-sdwan-edge
+  parameters: {}
+  ram: null
+  tags: []
+  x: 80
+  y: 400
+- configuration:
+  - content: "hostname Gateway\n!\nvrf definition inet\n rd 1:20\n route-target export\
+      \ 1:20\n route-target import 1:10\n route-target import 1:20\n!\n address-family\
+      \ ipv4\n  import ipv4 unicast map RM_DEFAULT\n exit-address-family\n!\nvrf definition\
+      \ mpls\n rd 1:30\n route-target export 1:30\n route-target import 1:10\n route-target\
+      \ import 1:30\n!\n address-family ipv4\n exit-address-family\n!\nvrf definition\
+      \ vpn0\n rd 1:10\n route-target export 1:10\n route-target import 1:10\n route-target\
+      \ import 1:20\n route-target import 1:30\n!\n address-family ipv4\n  import\
+      \ ipv4 unicast map RM_DEFAULT\n exit-address-family\n!\nip host vrf inet validator.sdwan.local\
+      \ 172.16.0.201\nip host vrf mpls validator.sdwan.local 172.16.0.201\nip host\
+      \ vrf vpn0 validator.sdwan.local 172.16.0.201\nno ip domain lookup\n!\nip dhcp\
+      \ pool inet\n vrf inet\n network 172.16.1.0 255.255.255.0\n default-router 172.16.1.254\n\
+      \ dns-server 172.16.1.254\n!\nip dhcp pool mpls\n vrf mpls\n network 172.16.2.0\
+      \ 255.255.255.0\n default-router 172.16.2.254\n dns-server 172.16.2.254\n!\n\
+      interface GigabitEthernet1\n vrf forwarding vpn0\n ip address 172.16.0.254 255.255.255.0\n\
+      \ ip nat inside\n no shutdown\n!\ninterface GigabitEthernet2\n vrf forwarding\
+      \ inet\n ip address 172.16.1.254 255.255.255.0\n ip nat inside\n no shutdown\n\
+      !\ninterface GigabitEthernet3\n vrf forwarding mpls\n ip address 172.16.2.254\
+      \ 255.255.255.0\n no shutdown\n!\ninterface GigabitEthernet4\n ip address 10.10.20.150\
+      \ 255.255.255.0\n ip nat outside\n no shutdown\n!\nip route 0.0.0.0 0.0.0.0\
+      \ 10.10.20.254\nip nat inside source list 1 interface GigabitEthernet4 vrf inet\
+      \ overload\nip nat inside source list 1 interface GigabitEthernet4 vrf vpn0\
+      \ overload\nip dns server\nip name-server vrf global 10.10.20.254\n!\nip prefix-list\
+      \ PL_DEFAULT seq 5 permit 0.0.0.0/0\n!\nip access-list standard 1\n 10 permit\
+      \ 10.0.0.0 0.0.0.255\n 20 permit 172.16.0.0 0.15.255.255\n 30 permit 192.168.0.0\
+      \ 0.0.255.255\n!\nroute-map RM_DEFAULT permit 10\n match ip address prefix-list\
+      \ PL_DEFAULT\n!\n"
+    name: iosxe_config.txt
+  cpu_limit: null
+  cpus: 2
+  hide_links: false
+  id: nGW
+  image_definition: csr1000v-17-03-08a
+  interfaces:
+  - id: gwL0
+    label: Loopback0
+    mac_address: null
+    slot: 0
+    type: loopback
+  - id: gw0
+    label: GigabitEthernet1
+    mac_address: null
+    slot: 0
+    type: physical
+  - id: gw1
+    label: GigabitEthernet2
+    mac_address: null
+    slot: 1
+    type: physical
+  - id: gw2
+    label: GigabitEthernet3
+    mac_address: null
+    slot: 2
+    type: physical
+  - id: gw3
+    label: GigabitEthernet4
+    mac_address: null
+    slot: 3
+    type: physical
+  label: Gateway
+  node_definition: csr1000v
+  parameters: {}
+  ram: 4096
+  tags: []
+  x: -320
+  y: -160
+- boot_disk_size: null
+  configuration: null
+  cpu_limit: null
+  cpus: null
+  data_volume: null
+  hide_links: false
+  id: nINET
+  image_definition: null
+  interfaces:
+  - id: inetp0
+    label: port0
+    mac_address: null
+    slot: 0
+    type: physical
+  - id: inetp1
+    label: port1
+    mac_address: null
+    slot: 1
+    type: physical
+  - id: inetp2
+    label: port2
+    mac_address: null
+    slot: 2
+    type: physical
+  - id: inetp3
+    label: port3
+    mac_address: null
+    slot: 3
+    type: physical
+  - id: inetp4
+    label: port4
+    mac_address: null
+    slot: 4
+    type: physical
+  - id: inetp5
+    label: port5
+    mac_address: null
+    slot: 5
+    type: physical
+  - id: inetp6
+    label: port6
+    mac_address: null
+    slot: 6
+    type: physical
+  - id: inetp7
+    label: port7
+    mac_address: null
+    slot: 7
+    type: physical
+  label: INET
+  node_definition: unmanaged_switch
+  parameters: {}
+  ram: null
+  tags: []
+  x: -80
+  y: 160
+- boot_disk_size: null
+  configuration: null
+  cpu_limit: null
+  cpus: null
+  data_volume: null
+  hide_links: false
+  id: nMPLS
+  image_definition: null
+  interfaces:
+  - id: mplsp0
+    label: port0
+    mac_address: null
+    slot: 0
+    type: physical
+  - id: mplsp1
+    label: port1
+    mac_address: null
+    slot: 1
+    type: physical
+  - id: mplsp2
+    label: port2
+    mac_address: null
+    slot: 2
+    type: physical
+  - id: mplsp3
+    label: port3
+    mac_address: null
+    slot: 3
+    type: physical
+  - id: mplsp4
+    label: port4
+    mac_address: null
+    slot: 4
+    type: physical
+  - id: mplsp5
+    label: port5
+    mac_address: null
+    slot: 5
+    type: physical
+  - id: mplsp6
+    label: port6
+    mac_address: null
+    slot: 6
+    type: physical
+  - id: mplsp7
+    label: port7
+    mac_address: null
+    slot: 7
+    type: physical
+  label: MPLS
+  node_definition: unmanaged_switch
+  parameters: {}
+  ram: null
+  tags: []
+  x: -80
+  y: -240
+smart_annotations: []
