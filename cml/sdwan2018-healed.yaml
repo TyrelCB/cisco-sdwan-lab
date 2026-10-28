@@ -134,6 +134,18 @@ links:
   label: MPLS-Edge4
   n1: nMPLS
   n2: n12
+- conditioning: {}
+  i1: gw1
+  i2: inetp4
+  id: c4d4470f-a65c-4cbc-bbad-d21a0cfc3e63
+  n1: nGW
+  n2: nINET
+- conditioning: {}
+  i1: gw2
+  i2: mplsp4
+  id: 51f23270-51ae-4472-9d0c-95ea8f5de9b3
+  n1: nGW
+  n2: nMPLS
 nodes:
 - boot_disk_size: null
   configuration:
