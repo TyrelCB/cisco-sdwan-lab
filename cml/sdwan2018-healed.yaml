@@ -1401,13 +1401,24 @@ nodes:
       !\ninterface GigabitEthernet3\n vrf forwarding mpls\n ip address 172.16.2.254\
       \ 255.255.255.0\n no shutdown\n!\ninterface GigabitEthernet4\n ip address 10.10.20.150\
       \ 255.255.255.0\n ip nat outside\n no shutdown\n!\nip route 0.0.0.0 0.0.0.0\
-      \ 10.10.20.254\nip nat inside source list 1 interface GigabitEthernet4 vrf inet\
-      \ overload\nip nat inside source list 1 interface GigabitEthernet4 vrf vpn0\
-      \ overload\nip dns server\nip name-server vrf global 10.10.20.254\n!\nip prefix-list\
-      \ PL_DEFAULT seq 5 permit 0.0.0.0/0\n!\nip access-list standard 1\n 10 permit\
-      \ 10.0.0.0 0.0.0.255\n 20 permit 172.16.0.0 0.15.255.255\n 30 permit 192.168.0.0\
-      \ 0.0.255.255\n!\nroute-map RM_DEFAULT permit 10\n match ip address prefix-list\
-      \ PL_DEFAULT\n!\n"
+      \ 10.10.20.254\nrouter bgp 65000\n bgp router-id 172.16.0.254\n bgp log-neighbor-changes\n\
+      \ !\n address-family ipv4\n  network 0.0.0.0\n exit-address-family\n address-family\
+      \ ipv4 vrf inet\n  network 172.16.1.0 mask 255.255.255.0\n exit-address-family\n\
+      \ !\n address-family ipv4 vrf mpls\n  network 172.16.2.0 mask 255.255.255.0\n\
+      \ exit-address-family\n !\n address-family ipv4 vrf vpn0\n  network 172.16.0.0\
+      \ mask 255.255.255.0\n exit-address-family\n !\nip nat inside source list 1\
+      \ interface GigabitEthernet4 vrf inet overload\nrouter bgp 65000\n bgp router-id\
+      \ 172.16.0.254\n bgp log-neighbor-changes\n !\n address-family ipv4\n  network\
+      \ 0.0.0.0\n exit-address-family\n address-family ipv4 vrf inet\n  network 172.16.1.0\
+      \ mask 255.255.255.0\n exit-address-family\n !\n address-family ipv4 vrf mpls\n\
+      \  network 172.16.2.0 mask 255.255.255.0\n exit-address-family\n !\n address-family\
+      \ ipv4 vrf vpn0\n  network 172.16.0.0 mask 255.255.255.0\n exit-address-family\n\
+      \ !\nip nat inside source list 1 interface GigabitEthernet4 vrf vpn0 overload\n\
+      ip dns server\nip name-server vrf global 10.10.20.254\n!\nip prefix-list PL_DEFAULT\
+      \ seq 5 permit 0.0.0.0/0\n!\nip access-list standard 1\n 10 permit 10.0.0.0\
+      \ 0.0.0.255\n 20 permit 172.16.0.0 0.15.255.255\n 30 permit 192.168.0.0 0.0.255.255\n\
+      !\nroute-map RM_DEFAULT permit 10\n match ip address prefix-list PL_DEFAULT\n\
+      !\n"
     name: iosxe_config.txt
   cpu_limit: null
   cpus: 2
