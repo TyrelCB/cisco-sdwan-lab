@@ -54,6 +54,31 @@ maintenance, monitor, commonComponents, common.
 - `GET /dataservice/template/config/running/{uuid}` → DEV0001 "Error publishing message" (sandbox doesn't back up running configs).
 - `GET /dataservice/template/config/attached/{uuid}` → "No config available" (devices attached to CLI-managed templates, not personalized).
 
+## WRITE PATH (verified end-to-end, Oct-30 session)
+Auth for writes: `admin` session in the persistent CDP Chromium (port 9333) on the reservation's vManage proxy (10.10.20.90); all REST goes through in-page `fetch()` via `/tmp/vmcall.py` (plain curl to the proxy 403s — JA3 filtering + rotating XSRF).
+
+### Classic feature-template attach is NOT possible on these edges
+`POST /template/device/config/attachfeature` with correct rows (get canonical rows from
+`POST /template/device/config/input {templateId,deviceIds:[uuid],isEdited,isMasterEdited}` —
+keys are **config paths** like `/1/GigabitEthernet3/interface/ip/address`, `//system/host-name`,
+NOT variable display-names; `dhcp-server/address-pool` is `ipv4-prefix` typed → `192.168.X.0/24`)
+passes all variable validation, then dies with:
+`/vmanage-cfs:templates/template{vedge-<uuid>}/global/device-version ... does not exist`
+Root cause: **all 4 edges are managed by Config Group `edge_basic`** (id `0cd3c1bd-254d-42f8-a932-1dd4d107c551`, description "Do not modify!") — `templateApplyLog` on `/system/device/vedges` shows "Deploying device with Config Group". Classic-template CFS nodes were never created; force-rediscover doesn't fix it. Don't fight it.
+
+### Config Group API (the sanctioned write path)
+- `GET /v1/config-group` → list (returns a bare JSON array, not `{data:[]}`)
+- `GET /v1/config-group/{cg}/device/variables` → per-device vars: `system_ip, host_name, site_id, ipv6_strict_control, pseudo_commit_timer, aaa_password, vpn0_gi1_inet_ip, vpn0_gi2_mpls_ip, vpn1_gi3_lan_ip, vpn1_gi3_dhcp_network, vpn1_gi3_dhcp_address_exclude[], vpn1_gi3_dhcp_default_gateway`
+- `PUT /v1/config-group/{cg}/device/variables` body `{"solution":"sdwan","devices":[{"device-id":<uuid>,"variables":[{name,value},...]}]}` → 200 `[uuid]`. Per-device scoped: sending one device's row does NOT wipe others'. (`family` key → SCHVALID0001; use `solution`.)
+- `POST /v1/config-group/{cg}/device/deploy` body `{"devices":[{"id":<uuid>}]}` → `{"parentTaskId":"deploy_config_group-<pid>"}`; poll `/device/action/status/<pid>`. **Verified: Edge4 deploy → "Device: Config applied successfully"** (30-Oct-2026 06:35 UTC).
+- Variable schema (JSON-Schema w/ profile/parcel paths): `GET /v1/config-group/{cg}/device/variables/schema`
+
+### Policy writes (classic API works fine for policy)
+Hub-and-spoke created via `POST /template/policy/definition/hubandspoke/` → def `6886a447-7cc1-4591-a5b5-88cd9e7d3278`. Needs `vpnList` with `listId` (created `Lab-Transit-VPN` `b760d407-…`), site lists `Lab-Hub-Sites`/`Lab-Spoke-Sites`; `definition.subDefinitions[]`, omit `preference` when `equalPreference:true`.
+
+### Device inventory endpoints that actually respond on 20.18.2
+`POST /system/device` (grid query), `GET /system/device/vedges` (rich per-edge rows: templateApplyLog, configStatusMessage, cert state). `/device/system/info` GET → 200 but empty `data`. `/about/device`, `/cluster/status` → 404. BFD: `/device/bfd/tloc/detail` (8 rows: per system-ip×color up/session count); `/device/bfd/sites/detail` → empty; `/device/bfd/sessions` → 400.
+
 ## Repro
 `scripts/sdv2.sh GET /dataservice/device` (auto-reauth on token expiry).
 
