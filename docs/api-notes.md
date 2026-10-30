@@ -79,6 +79,17 @@ Hub-and-spoke created via `POST /template/policy/definition/hubandspoke/` → de
 ### Device inventory endpoints that actually respond on 20.18.2
 `POST /system/device` (grid query), `GET /system/device/vedges` (rich per-edge rows: templateApplyLog, configStatusMessage, cert state). `/device/system/info` GET → 200 but empty `data`. `/about/device`, `/cluster/status` → 404. BFD: `/device/bfd/tloc/detail` (8 rows: per system-ip×color up/session count); `/device/bfd/sites/detail` → empty; `/device/bfd/sessions` → 400.
 
+### BFD failover demo (verified end-to-end, 30-Oct-2026)
+Timeline via Config Group variable change on Edge3 (`vpn0_gi2_mpls_ip` 172.16.2.3 → 172.16.99.3, deploy):
+- baseline: 8 TLOCs (`/device/bfd/tloc/detail`), each `up`, 3 BFD sessions
+- fault deploy → within ~30s **Edge3 mpls row disappears** from tloc/detail (TLOC withdrawal = row removal, *not* a `down` state — never assert on a `down` row here)
+- during fault: Edge3 `biz-internet up/3` persists (traffic on surviving transport); every peer's mpls sessions 3→2 (mesh recalculated)
+- revert + deploy → Edge3 mpls back `up/3` at +40s; **all 8 TLOCs fully restored (+3 sessions everywhere) by +180s**
+
+### Session lifecycle gotcha
+vManage UI sessions idle-timeout fast (minutes). On timeout the SPA lands on `index.html?reason=sessiontimeout` and in-page fetch throws (vmcall returns non-JSON). Fix: re-drive the login **form** (set input values + click "Log in") — direct POST to `/j_security_check` via fetch returns 200 but does NOT re-establish the cookie in this SPA context. `/tmp/vmcall.py` now auto-relogins and retries on 401/403/fetch-throw. Credentials: admin/C1sco12345 (in reservation page HTML; devnetuser is operator=RO).
+Reservation guide page (`.../labguides/reservation/sdwan2018/<n>`) is currently unreachable through the VPN proxy (TLS handshake hangs) — don't block on it.
+
 ## Repro
 `scripts/sdv2.sh GET /dataservice/device` (auto-reauth on token expiry).
 
