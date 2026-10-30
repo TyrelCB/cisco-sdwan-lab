@@ -37,6 +37,10 @@ OMP up, 3 control connections each, certs valid, zero alarms. Endpoint discovery
 trick that unlocked everything else: the SPA's lazy JS chunks carry the complete
 client-side endpoint table (recipe in [`docs/api-notes.md`](docs/api-notes.md)).
 
+![Monitor](docs/shots/13-state.png)
+*Monitor → Overview: 4/4 WAN edges reachable, 24 tunnels good, all sites healthy —
+the same picture the API returns.*
+
 ### Act 2 — Write policy (admin role, classic policy API)
 Created a **hub-and-spoke data policy** end-to-end via
 `POST /template/policy/definition/hubandspoke/` — site lists (`Lab-Hub-Sites`,
@@ -56,6 +60,10 @@ failed for hours with `TemplateException: expecting non-null value for field
 2. Even then, classic attach dies with `vmanage-cfs:templates/... does not exist` —
    **root cause: the sandbox manages every edge with a Config Group** (`edge_basic`,
    "Do not modify!"). Classic-template CFS nodes were never created.
+
+![WAN Edge list](docs/shots/31-wan-edges.png)
+*Configuration → WAN Edge list: the four live edges show `Managed by: Config-Group
+edge_basic` and `In Sync` — the line that explains why classic template attach 400s.*
 
 The sanctioned write path (verified end-to-end):
 
@@ -78,9 +86,6 @@ Monitoring was one endpoint: `GET /device/bfd/tloc/detail`.
 | during fault | Edge3 `biz-internet up/3` (traffic on surviving WAN); all peers' mpls sessions 3→2 — mesh recalculated |
 | revert + deploy | Edge3 mpls `up/3` at +40s |
 | +180s | **fully recovered**: 8 TLOCs, 3 sessions everywhere, zero manual steps |
-
-![Monitor](docs/shots/01-monitor-devices.png)
-![Config Groups](docs/shots/03-config-groups.png)
 
 ---
 
