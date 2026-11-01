@@ -4,6 +4,13 @@ Two DevNet sandboxes, one goal: drive a real SD-WAN fabric entirely by API — r
 health, write policy, push configuration, and break/repair the overlay while watching
 convergence. Everything here was verified live on 2026-10-27 → 10-30.
 
+> **Run this yourself:** both labs are free and still available. The sandbox catalog now
+> lives at **[stackautomation.cisco.com/DevNet](https://stackautomation.cisco.com/DevNet)**
+> (DevNet Sandboxes, powered by Cisco Stack Automation by Quali — sign in with a Cisco ID).
+> Always-on sandboxes open instantly in the browser; the on-demand SD-WAN reservation
+> (used for the write/failover acts) spins up a private fabric for up to 7 days over VPN.
+> Catalog entry: [developer.cisco.com/sandbox](https://developer.cisco.com/sandbox).
+
 ![Topology](diagrams/sdwan-overview.png)
 
 ## The Fabrics
