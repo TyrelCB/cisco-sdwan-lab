@@ -61,7 +61,7 @@ failed for hours with `TemplateException: expecting non-null value for field
    **root cause: the sandbox manages every edge with a Config Group** (`edge_basic`,
    "Do not modify!"). Classic-template CFS nodes were never created.
 
-![WAN Edge list](docs/shots/31-wan-edges.png)
+![WAN Edge list](docs/shots/wan-edge-list.png)
 *Configuration → WAN Edge list: the four live edges show `Managed by: Config-Group
 edge_basic` and `In Sync` — the line that explains why classic template attach 400s.*
 
